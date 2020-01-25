@@ -18,13 +18,13 @@
 
 REST API должен поддерживать следующие рауты.
 
-### GET /api/contacts
+### @ GET /api/contacts
 
 - ничего не получает
 - вызывает функцию `listContacts` для работы с json-файлом contacts.json
 - возвращает массив всех контактов в json-формате со статусом 200
 
-### GET /api/contacts/:contactId
+### @ GET /api/contacts/:contactId
 
 - Не получает body
 - Получает параметр `contactId`
@@ -33,7 +33,7 @@ REST API должен поддерживать следующие рауты.
 - если такого id нет, возвращает json с ключом `"message": "Not found"` и
   статусом 404
 
-### POST /api/contacts
+### @ POST /api/contacts
 
 - Получает body в формате `{name, email, phone}`
 - Если в body нет каких-то обязательных полей, возарщает json с ключом
@@ -43,7 +43,7 @@ REST API должен поддерживать следующие рауты.
 - По результату работы функции возвращает обьект с добавленным id
   `{id, name, email, phone}` и статусом 201
 
-### DELETE /api/contacts/:contactId
+### @ DELETE /api/contacts/:contactId
 
 - Не получает body
 - Получает параметр `contactId`
@@ -53,7 +53,7 @@ REST API должен поддерживать следующие рауты.
 - если такого id нет, возвращает json с ключом `"message": "Not found"` и
   статусом 404
 
-### PATCH /api/contacts/:contactId
+### @ PATCH /api/contacts/:contactId
 
 - Получает body в json-формате c обновлением любых полей `name, email и phone`
 - Если body нет, возарщает json с ключом `{"message": "missing fields"}` и
