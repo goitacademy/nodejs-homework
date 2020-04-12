@@ -26,6 +26,8 @@
 
 ### Регистрация
 
+Создать ендпоинт [`/auth/register`](#register-request)
+
 Сделать валидацию всех обязательных полей (email и password). При ошибке
 валидации вернуть [#register-fields-error-response](#register-fields-error-response).
 
@@ -82,6 +84,8 @@ ResponseBody: {
 ```
 
 ### Логин
+
+Создать ендпоинт [`/auth/login`](#login-request)
 
 В модели `User` найти пользователя по `email`.
 
@@ -154,6 +158,8 @@ ResponseBody: {
 
 ### Логаут
 
+Создать ендпоинт [`/auth/logout`](#logout-request)
+
 Добавь в раут мидлвар проверки токена.
 
 - В модели `User` найти пользователя по `_id`.
@@ -164,7 +170,6 @@ ResponseBody: {
 #### logout-request
 
 ```shell
-# Запрос
 POST /auth/logout
 Authorization: "Bearer token"
 ```
@@ -191,6 +196,8 @@ ResponseBody: {
 
 ### Текущий - получить данные юзера по токену
 
+Создать ендпоинт [`/users/current`](#current-request)
+
 Добавь в раут мидлвар проверки токена.
 
 - Если пользователя не сущестует вернуть [#current-error-response](#current-error-response)
@@ -199,7 +206,7 @@ ResponseBody: {
 #### current-request
 
 ```shell
-GET /auth/current
+GET /users/current
 Authorization: "Bearer token"
 ```
 
@@ -230,4 +237,4 @@ ResponseBody: {
   [mongoose-paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2) для
   коллекции контактов (GET /contacts?page=1&limit=20).
 - Сделать сортировку контактов по типу подписки (GET /contacts?sub=free)
-- Обновление данных пользователя (PATCH /users) 
+- Обновление данных пользователя (PATCH /users)
