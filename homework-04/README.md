@@ -55,7 +55,6 @@ RequestBody: {
 Status: 201 Created
 Content-Type: application/json
 ResponseBody: {
-  "token": "exampletoken",
   "user": {
     "email": "example@example.com",
     "subscription": "free"
@@ -237,4 +236,4 @@ ResponseBody: {
   [mongoose-paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2) для
   коллекции контактов (GET /contacts?page=1&limit=20).
 - Сделать сортировку контактов по типу подписки (GET /contacts?sub=free)
-- Обновление данных пользователя (PATCH /users)
+- Обновление подписки пользователя через метод PATCH /users только по полю `subscription` с вариантамы `['free', 'pro', 'premium']`
