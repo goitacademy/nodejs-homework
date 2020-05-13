@@ -235,5 +235,5 @@ ResponseBody: {
 - Сделать пагинацию с
   [mongoose-paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2) для
   коллекции контактов (GET /contacts?page=1&limit=20).
-- Сделать сортировку контактов по типу подписки (GET /contacts?sub=free)
-- Обновление подписки пользователя через метод PATCH /users только по полю `subscription` с вариантамы `['free', 'pro', 'premium']`
+- Сделать фильтрацию контактов по типу подписки (GET /contacts?sub=free)
+- Обновление подписки (`subscription`) пользователя через эндпоинт PATCH /users. Подписка должна иметь одно из следующих значений `['free', 'pro', 'premium']`
