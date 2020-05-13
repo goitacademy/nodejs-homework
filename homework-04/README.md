@@ -67,7 +67,7 @@ ResponseBody: {
 }
 ```
 
-#### registration-success-response
+#### Registration success response
 
 ```shell
 Status: 201 Created
@@ -93,7 +93,7 @@ ResponseBody: {
   совпадают создать токен, сохранить в текущем юзере и вернуть [Успешный ответ](#login-success-response).
 - Если пароль или имейл неверный, вернуть [Ошибку Unauthorized](#login-auth-error).
 
-#### login-request
+#### Login request
 
 ```shell
 POST /auth/login
@@ -104,7 +104,7 @@ RequestBody: {
 }
 ```
 
-#### login-validation-error
+#### Login validation error
 
 ```shell
 Status: 400 Bad Request
@@ -112,7 +112,7 @@ Content-Type: application/json
 ResponseBody: <Ошибка от Joi или другой валидационной библиотеки>
 ```
 
-#### login-success-response
+#### Login success response
 
 ```shell
 Status: 200 OK
@@ -126,7 +126,7 @@ ResponseBody: {
 }
 ```
 
-#### login-auth-error
+#### Login auth error
 ```shell
 Status: 401 Unauthorized
 ResponseBody: Email or password is wrong
@@ -147,7 +147,7 @@ ResponseBody: Email or password is wrong
   его данные в `req.user` и вызвать `next()`. Если пользователя с таким id не
   существет, вернуть [Ошибку Unauthorized](#middleware-unauthorized-error)
 
-#### middleware-unauthorized-error
+#### Middleware unauthorized error
 
 ```shell
 Status: 401 Unauthorized
@@ -170,14 +170,14 @@ ResponseBody: {
 - В противном случае, удалить токен в текущем юзере и вернуть
   [Успешный ответ](#logout-success-response).
 
-#### logout-request
+#### Logout request
 
 ```shell
 POST /auth/logout
 Authorization: "Bearer token"
 ```
 
-#### logout-unauthorized-error
+#### Logout unauthorized error
 
 ```shell
 Status: 401 Unauthorized
@@ -187,7 +187,7 @@ ResponseBody: {
 }
 ```
 
-#### logout-success-response
+#### Logout success response
 
 ```shell
 Status: 204 No Content
@@ -195,21 +195,21 @@ Status: 204 No Content
 
 ### Текущий - получить данные юзера по токену
 
-Создать ендпоинт [`/users/current`](#current-request)
+Создать ендпоинт [`/users/current`](#current-user-request)
 
 Добавь в раут мидлвар проверки токена.
 
-- Если пользователя не сущестует вернуть [Ошибку Unauthorized](#current-unauthorized-error)
-- В противном случае вернуть [Успешный ответ](#current-success-response)
+- Если пользователя не сущестует вернуть [Ошибку Unauthorized](#current-user-unauthorized-error)
+- В противном случае вернуть [Успешный ответ](#current-user-success-response)
 
-#### current-request
+#### Current user request
 
 ```shell
 GET /users/current
 Authorization: "Bearer token"
 ```
 
-#### current-unauthorized-error
+#### Current user unauthorized error
 
 ```shell
 Status: 401 Unauthorized
@@ -219,7 +219,7 @@ ResponseBody: {
 }
 ```
 
-#### current-success-response
+#### Current user success response
 
 ```shell
 Status: 200 OK
