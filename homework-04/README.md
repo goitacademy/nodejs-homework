@@ -26,19 +26,19 @@
 
 ### Регистрация
 
-Создать ендпоинт [`/auth/register`](#register-request)
+Создать ендпоинт [`/auth/register`](#registration-request)
 
 Сделать валидацию всех обязательных полей (email и password). При ошибке
-валидации вернуть [Ошибку валидации](#validation-error).
+валидации вернуть [Ошибку валидации](#registration-validation-error).
 
 В случае успешной валидации в модели `User` создать пользователя по данным
 которые прошли валидацию. Для засолки паролей используй
 [bcrypt](https://www.npmjs.com/package/bcrypt)
 
-- Если почта уже используется кем-то другим, вернуть [Ошибку Conflict](#register-conflict-error).
-- В противном случае вернуть [Успешный ответ](#register-success-response).
+- Если почта уже используется кем-то другим, вернуть [Ошибку Conflict](#registration-conflict-error).
+- В противном случае вернуть [Успешный ответ](#registration-success-response).
 
-#### register-request
+#### Registration request
 
 ```shell
 POST /auth/register
@@ -49,7 +49,7 @@ RequestBody: {
 }
 ```
 
-#### validation-error
+#### Registration validation error
 
 ```shell
 Status: 400 Bad Request
@@ -57,7 +57,7 @@ Content-Type: application/json
 ResponseBody: <Ошибка от Joi или другой валидационной библиотеки>
 ```
 
-#### register-conflict-error
+#### Registration conflict error
 
 ```shell
 Status: 409 Conflict
@@ -67,7 +67,7 @@ ResponseBody: {
 }
 ```
 
-#### register-success-response
+#### registration-success-response
 
 ```shell
 Status: 201 Created
@@ -87,7 +87,7 @@ ResponseBody: {
 В модели `User` найти пользователя по `email`.
 
 Сделать валидацию всех обязательных полей (email и password). При ошибке
-валидации вернуть [Ошибку валидации](#validation-error).
+валидации вернуть [Ошибку валидации](#validation-error-login).
 
 - В противном случае, сравнить пароль для найденного юзера, если пароли
   совпадают создать токен, сохранить в текущем юзере и вернуть [Успешный ответ](#login-success-response).
@@ -102,6 +102,14 @@ RequestBody: {
   "email": "example@example.com",
   "password": "examplepassword"
 }
+```
+
+#### login-validation-error
+
+```shell
+Status: 400 Bad Request
+Content-Type: application/json
+ResponseBody: <Ошибка от Joi или другой валидационной библиотеки>
 ```
 
 #### login-success-response
@@ -158,7 +166,7 @@ ResponseBody: {
 Добавь в раут мидлвар проверки токена.
 
 - В модели `User` найти пользователя по `_id`.
-- Если пользователя не сущестует вернуть [Ошибку Unauthorized](#middleware-unauthorized-error).
+- Если пользователя не сущестует вернуть [Ошибку Unauthorized](#logout-unauthorized-error).
 - В противном случае, удалить токен в текущем юзере и вернуть
   [Успешный ответ](#logout-success-response).
 
@@ -167,6 +175,16 @@ ResponseBody: {
 ```shell
 POST /auth/logout
 Authorization: "Bearer token"
+```
+
+#### logout-unauthorized-error
+
+```shell
+Status: 401 Unauthorized
+Content-Type: application/json
+ResponseBody: {
+  "message": "Not authorized"
+}
 ```
 
 #### logout-success-response
@@ -181,7 +199,7 @@ Status: 204 No Content
 
 Добавь в раут мидлвар проверки токена.
 
-- Если пользователя не сущестует вернуть [Ошибку Unauthorized](#middleware-unauthorized-error)
+- Если пользователя не сущестует вернуть [Ошибку Unauthorized](#current-unauthorized-error)
 - В противном случае вернуть [Успешный ответ](#current-success-response)
 
 #### current-request
@@ -189,6 +207,16 @@ Status: 204 No Content
 ```shell
 GET /users/current
 Authorization: "Bearer token"
+```
+
+#### current-unauthorized-error
+
+```shell
+Status: 401 Unauthorized
+Content-Type: application/json
+ResponseBody: {
+  "message": "Not authorized"
+}
 ```
 
 #### current-success-response
