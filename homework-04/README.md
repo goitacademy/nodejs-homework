@@ -88,10 +88,10 @@ ResponseBody: {
 
 В модели `User` найти пользователя по `email`.
 
-- Если пользователя не сущестует вернуть [#login-error-response](#login-error-response).
+- Если тело запроса не обьект с email и password, вернуть [#login-validation-error](#login-validation-error).
 - В противном случае, сравнить пароль для найденного юзера, если пароли
   совпадают создать токен, сохранить в текущем юзере и вернуть [#login-success-response](#login-success-response).
-- Если пароль не верный, вернуть [#login-error-response](#login-error-response).
+- Если пароль не верный, вернуть [#login-auth-error](#login-auth-error).
 
 #### login-request
 
@@ -102,6 +102,14 @@ RequestBody: {
   "email": "example@example.com",
   "password": "examplepassword"
 }
+```
+
+#### login-validation-error
+
+```shell
+Status: 400 Bad Request
+Content-Type: application/json
+ResponseBody: <Ошибка от Joi или другой валидационной библиотеки>
 ```
 
 #### login-success-response
@@ -118,14 +126,10 @@ ResponseBody: {
 }
 ```
 
-#### login-error-response
-
+#### login-auth-error
 ```shell
-Status: 400 BAD
-Content-Type: application/json
-ResponseBody: {
-  "message": "Неверный логин или пароль"
-}
+Status: 401 Unauthorized
+ResponseBody: Email or password is wrong
 ```
 
 ## Шаг 3
