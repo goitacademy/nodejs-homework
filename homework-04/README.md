@@ -35,7 +35,7 @@
 которые прошли валидацию. Для засолки паролей используй
 [bcrypt](https://www.npmjs.com/package/bcrypt)
 
-- Если почта уже используется кемто другим, вернуть [#register-email-error-response](#register-email-error-response).
+- Если почта уже используется кем-то другим, вернуть [#register-email-error-response](#register-email-error-response).
 - В противном случае вернуть [#register-success-response](#register-success-response).
 
 #### register-request
@@ -88,7 +88,7 @@ ResponseBody: {
 
 В модели `User` найти пользователя по `email`.
 
-- Если пользователя не сущестует вернуть # Неуспешный ответ.
+- Если пользователя не сущестует вернуть [#login-error-response](#login-error-response).
 - В противном случае, сравнить пароль для найденного юзера, если пароли
   совпадают создать токен, сохранить в текущем юзере и вернуть [#login-success-response](#login-success-response).
 - Если пароль не верный, вернуть [#login-error-response](#login-error-response).
