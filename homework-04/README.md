@@ -29,14 +29,14 @@
 Создать ендпоинт [`/auth/register`](#register-request)
 
 Сделать валидацию всех обязательных полей (email и password). При ошибке
-валидации вернуть [#register-fields-error-response](#register-fields-error-response).
+валидации вернуть [Ошибку валидации](#validation-error).
 
 В случае успешной валидации в модели `User` создать пользователя по данным
 которые прошли валидацию. Для засолки паролей используй
 [bcrypt](https://www.npmjs.com/package/bcrypt)
 
-- Если почта уже используется кем-то другим, вернуть [#register-email-error-response](#register-email-error-response).
-- В противном случае вернуть [#register-success-response](#register-success-response).
+- Если почта уже используется кем-то другим, вернуть [Ошибку Conflict](#register-conflict-error).
+- В противном случае вернуть [Успешный ответ](#register-success-response).
 
 #### register-request
 
@@ -46,6 +46,24 @@ Content-Type: application/json
 RequestBody: {
   "email": "example@example.com",
   "password": "examplepassword"
+}
+```
+
+#### validation-error
+
+```shell
+Status: 400 Bad Request
+Content-Type: application/json
+ResponseBody: <Ошибка от Joi или другой валидационной библиотеки>
+```
+
+#### register-conflict-error
+
+```shell
+Status: 409 Conflict
+Content-Type: application/json
+ResponseBody: {
+  "message": "Email in use"
 }
 ```
 
@@ -62,36 +80,18 @@ ResponseBody: {
 }
 ```
 
-#### register-fields-error-response
-
-```shell
-Status: 422 BAD
-Content-Type: application/json
-ResponseBody: {
-  "message": "Missing required fields"
-}
-```
-
-#### register-email-error-response
-
-```shell
-Status: 400 BAD
-Content-Type: application/json
-ResponseBody: {
-  "message": "Email in use"
-}
-```
-
 ### Логин
 
 Создать ендпоинт [`/auth/login`](#login-request)
 
 В модели `User` найти пользователя по `email`.
 
-- Если тело запроса не обьект с email и password, вернуть [#login-validation-error](#login-validation-error).
+Сделать валидацию всех обязательных полей (email и password). При ошибке
+валидации вернуть [Ошибку валидации](#validation-error).
+
 - В противном случае, сравнить пароль для найденного юзера, если пароли
-  совпадают создать токен, сохранить в текущем юзере и вернуть [#login-success-response](#login-success-response).
-- Если пароль не верный, вернуть [#login-auth-error](#login-auth-error).
+  совпадают создать токен, сохранить в текущем юзере и вернуть [Успешный ответ](#login-success-response).
+- Если пароль или имейл неверный, вернуть [Ошибку Unauthorized](#login-auth-error).
 
 #### login-request
 
@@ -102,14 +102,6 @@ RequestBody: {
   "email": "example@example.com",
   "password": "examplepassword"
 }
-```
-
-#### login-validation-error
-
-```shell
-Status: 400 Bad Request
-Content-Type: application/json
-ResponseBody: <Ошибка от Joi или другой валидационной библиотеки>
 ```
 
 #### login-success-response
@@ -140,17 +132,17 @@ ResponseBody: Email or password is wrong
 быть защищены.
 
 - Мидлвар берет токен из заголовков `Authorization`, проверяет токен на
-  валдность.
-- В случае ошибки вернуть [#token-check-response](#token-check-response).
+  валидность.
+- В случае ошибки вернуть [Ошибку Unauthorized](#middleware-unauthorized-error).
 - Если валидация прошла успешно, получить из токена id пользователя. Найти
   пользователя в базе данных по этому id. Если пользователь существует, записать
   его данные в `req.user` и вызвать `next()`. Если пользователя с таким id не
-  существет, вернуть [#token-check-response](#token-check-response)
+  существет, вернуть [Ошибку Unauthorized](#middleware-unauthorized-error)
 
-#### token-check-response
+#### middleware-unauthorized-error
 
 ```shell
-Status: 401 UNATHORIZED
+Status: 401 Unauthorized
 Content-Type: application/json
 ResponseBody: {
   "message": "Not authorized"
@@ -166,9 +158,9 @@ ResponseBody: {
 Добавь в раут мидлвар проверки токена.
 
 - В модели `User` найти пользователя по `_id`.
-- Если пользователя не сущестует вернуть [#logout-error-response](#logout-error-response).
+- Если пользователя не сущестует вернуть [Ошибку Unauthorized](#middleware-unauthorized-error).
 - В противном случае, удалить токен в текущем юзере и вернуть
-  [#logout-success-response](#logout-success-response).
+  [Успешный ответ](#logout-success-response).
 
 #### logout-request
 
@@ -180,21 +172,7 @@ Authorization: "Bearer token"
 #### logout-success-response
 
 ```shell
-Status: 200 OK
-Content-Type: application/json
-ResponseBody: {
-  "message": "Logout success"
-}
-```
-
-#### logout-error-response
-
-```shell
-Status: 401 BAD
-Content-Type: application/json
-ResponseBody: {
-  "message": "Not authorized"
-}
+Status: 204 No Content
 ```
 
 ### Текущий - получить данные юзера по токену
@@ -203,8 +181,8 @@ ResponseBody: {
 
 Добавь в раут мидлвар проверки токена.
 
-- Если пользователя не сущестует вернуть [#current-error-response](#current-error-response)
-- В противном случае вернуть [#current-success-response](#current-success-response)
+- Если пользователя не сущестует вернуть [Ошибку Unauthorized](#middleware-unauthorized-error)
+- В противном случае вернуть [Успешный ответ](#current-success-response)
 
 #### current-request
 
@@ -221,16 +199,6 @@ Content-Type: application/json
 ResponseBody: {
   "email": "example@example.com",
   "subscription": "free"
-}
-```
-
-#### current-error-response
-
-```shell
-Status: 401 BAD
-Content-Type: application/json
-ResponseBody: {
-  "message": "Not authorized"
 }
 ```
 
