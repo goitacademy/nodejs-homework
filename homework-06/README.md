@@ -37,14 +37,14 @@
 GET /auth/verify/:verificationToken
 ```
 
-#### Verification user Not Found
+### Verification user Not Found
 
 ```shell
 Status: 404 Not Found
 ResponseBody: User not found
 ```
 
-#### Verification success response
+### Verification success response
 
 ```shell
 Status: 200 OK
