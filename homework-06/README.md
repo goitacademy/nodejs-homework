@@ -56,7 +56,7 @@ Status: 200 OK
 
 После создания пользователя при регистрации:
 
-- создать `verificatioToken` для зарегистрированного пользователя и записать его в БД (для генерации токена используйте [uuid](https://www.npmjs.com/package/uuid))
+- создать `verificationToken` для зарегистрированного пользователя и записать его в БД (для генерации токена используйте [uuid](https://www.npmjs.com/package/uuid))
 - отправить email на почту пользователя и указать ссылку для верификации email'а (`/auth/verify/:verificationToken`) в [html сообщения](https://app.gitbook.com/@reloaderlev/s/goit-node-js-new-program/email-rozsilka/sendgrid.-vidpravka-email-iv-cherez-paket-sendgrid-mail)
 
 ## Шаг 4
