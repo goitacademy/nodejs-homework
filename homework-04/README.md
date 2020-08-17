@@ -1,3 +1,5 @@
+**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+
 # Домашнее задание 4
 
 Создай ветку `04-auth` из ветки `master`.
@@ -35,7 +37,8 @@
 которые прошли валидацию. Для засолки паролей используй
 [bcrypt](https://www.npmjs.com/package/bcrypt)
 
-- Если почта уже используется кем-то другим, вернуть [Ошибку Conflict](#registration-conflict-error).
+- Если почта уже используется кем-то другим, вернуть
+  [Ошибку Conflict](#registration-conflict-error).
 - В противном случае вернуть [Успешный ответ](#registration-success-response).
 
 #### Registration request
@@ -90,8 +93,10 @@ ResponseBody: {
 валидации вернуть [Ошибку валидации](#validation-error-login).
 
 - В противном случае, сравнить пароль для найденного юзера, если пароли
-  совпадают создать токен, сохранить в текущем юзере и вернуть [Успешный ответ](#login-success-response).
-- Если пароль или имейл неверный, вернуть [Ошибку Unauthorized](#login-auth-error).
+  совпадают создать токен, сохранить в текущем юзере и вернуть
+  [Успешный ответ](#login-success-response).
+- Если пароль или имейл неверный, вернуть
+  [Ошибку Unauthorized](#login-auth-error).
 
 #### Login request
 
@@ -127,6 +132,7 @@ ResponseBody: {
 ```
 
 #### Login auth error
+
 ```shell
 Status: 401 Unauthorized
 ResponseBody: Email or password is wrong
@@ -166,7 +172,8 @@ ResponseBody: {
 Добавь в раут мидлвар проверки токена.
 
 - В модели `User` найти пользователя по `_id`.
-- Если пользователя не сущестует вернуть [Ошибку Unauthorized](#logout-unauthorized-error).
+- Если пользователя не сущестует вернуть
+  [Ошибку Unauthorized](#logout-unauthorized-error).
 - В противном случае, удалить токен в текущем юзере и вернуть
   [Успешный ответ](#logout-success-response).
 
@@ -199,7 +206,8 @@ Status: 204 No Content
 
 Добавь в раут мидлвар проверки токена.
 
-- Если пользователя не сущестует вернуть [Ошибку Unauthorized](#current-user-unauthorized-error)
+- Если пользователя не сущестует вернуть
+  [Ошибку Unauthorized](#current-user-unauthorized-error)
 - В противном случае вернуть [Успешный ответ](#current-user-success-response)
 
 #### Current user request
@@ -236,4 +244,5 @@ ResponseBody: {
   [mongoose-paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2) для
   коллекции контактов (GET /contacts?page=1&limit=20).
 - Сделать фильтрацию контактов по типу подписки (GET /contacts?sub=free)
-- Обновление подписки (`subscription`) пользователя через ендпоинт PATCH /users. Подписка должна иметь одно из следующих значений `['free', 'pro', 'premium']`
+- Обновление подписки (`subscription`) пользователя через ендпоинт PATCH /users.
+  Подписка должна иметь одно из следующих значений `['free', 'pro', 'premium']`
