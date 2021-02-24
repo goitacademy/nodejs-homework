@@ -2,15 +2,26 @@
 
 # Домашнє завдання 2
 
-Створи гілку `02-express` з гілки `master`.
+Подивися пояснюче відео як це зробити та здавати ДЗ правильно:
+[![Title](https://i9.ytimg.com/vi_webp/wabSW_sz_cM/mqdefault.webp?time=1614170400000&sqp=CKCS2YEG&rs=AOn4CLDRrwPZrvzNeTmlGdxi49LPARaViA)]
+(https://www.youtube.com/watch?v=wabSW_sz_cM ' пояснення')
 
-Написать REST API для работы с коллекцией контактов. Для работы с REST API
-используй [Postman](https://www.getpostman.com/).
+Написати REST API для роботи з колекцією контактів. Для роботи з REST API
+використовуй [Postman] (https://www.getpostman.com/).
+
+Прочитай уважно readme в клонованому темплейті, там описаний механізм здачі
+домашніх завдань. Та починай виконувати ДЗ
 
 ## Крок 1
 
-Добавь в проект пакеты [express](https://www.npmjs.com/package/express),
-[morgan](https://www.npmjs.com/package/morgan) и
+Встанови в командою
+
+```bash
+npm i
+```
+
+такі пакети в проекті [express](https://www.npmjs.com/package/express),
+[morgan](https://www.npmjs.com/package/morgan) та
 [cors](https://www.npmjs.com/package/cors).
 
 ## Крок 2
