@@ -2,21 +2,35 @@
 
 # Домашнее задание 2
 
-Создай ветку `02-express` из ветки `master`.
+Создай форк
+[репозитория](https://github.com/goitacademy/nodejs-homework-template) в свой
+github аккаунт.
+
+Посмотри поясняющее видео как это сделать и сдавать ДЗ правильно:
+[![Title](https://i9.ytimg.com/vi_webp/wabSW_sz_cM/mqdefault.webp?time=1614170400000&sqp=CKCS2YEG&rs=AOn4CLDRrwPZrvzNeTmlGdxi49LPARaViA)](https://www.youtube.com/watch?v=wabSW_sz_cM 'Пояснение')
 
 Написать REST API для работы с коллекцией контактов. Для работы с REST API
 используй [Postman](https://www.getpostman.com/).
 
+Прочитай внимательно readme в клонированном темплейте, там описан механизм сдачи
+домашних заданий. Приступай к выполнению ДЗ
+
 ## Шаг 1
 
-Добавь в проект пакеты [express](https://www.npmjs.com/package/express),
+Установи в командой
+
+```bash
+npm i
+```
+
+следующие пакеты в проекте [express](https://www.npmjs.com/package/express),
 [morgan](https://www.npmjs.com/package/morgan) и
 [cors](https://www.npmjs.com/package/cors).
 
 ## Шаг 2
 
-В index.js веб сервер на express и добавляем прослойки morgan и cors. Настраивай
-раутинг для работы с коллекцией контактов.
+В app.js веб сервер на express и добавлены прослойки morgan и cors. Настраивай
+роутинг для работы с коллекцией контактов.
 
 REST API должен поддерживать следующие рауты.
 
