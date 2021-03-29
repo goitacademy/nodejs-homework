@@ -15,7 +15,7 @@ github аккаунт.
 
 ## Шаг 1
 
-Создай ветку 02-express из ветки master.
+Создай ветку `hw02-express` из ветки master.
 
 Установи модули командой:
 
@@ -64,7 +64,7 @@ REST API должен поддерживать следующие рауты.
 - если такой `id` есть, возвращает json формата `{"message": "contact deleted"}` и статусом `200`
 - если такого `id` нет, возвращает json с ключом `"message": "Not found"` и статусом `404`
 
-### @ PATCH /api/contacts/:contactId
+### @ PUT /api/contacts/:contactId
 
 - Получает параметр `contactId`
 - Получает `body` в json-формате c обновлением любых полей `name, email и phone`

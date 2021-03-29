@@ -11,7 +11,7 @@
 
 ## Крок 1
 
-Створи гілку 02-express з гілки master.
+Створи гілку `hw02-express` з гілки master.
 
 Встанови в командою пакети
 
@@ -60,7 +60,7 @@ REST API повинен підтримувати такі раути.
 - якщо такий `id` є, повертає json формату `{"message": "contact deleted"}` і статусом `200`
 - якщо такого `id` немає, повертає json з ключем `"message": "Not found"` і статусом `404`
 
-### @ PATCH /api/contacts/:contactId
+### @ PUT /api/contacts/:contactId
 
 - Отримує параметр `contactId`
 - Отримує `body` в json-форматі c оновленням будь-яких полів `name, email и phone`
