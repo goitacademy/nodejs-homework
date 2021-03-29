@@ -2,8 +2,6 @@
 
 # Домашнє завдання 1
 
-Створи гілку `01-node-basics` з гілки `master`.
-
 ## Крок 1
 
 - Ініціалізується npm в проекті
@@ -98,6 +96,48 @@ function invokeAction({ action, id, name, email, phone }) {
 invokeAction(argv);
 ```
 
+Так само, ви можете використовувати модуль [commander] (https://www.npmjs.com/package/commander) для парсинга аргументів командного рядка. Це більш популярна альтернатива модуля `yargs`
+
+```js
+const { Command } = require('commander')
+const program = new Command()
+program
+  .option('-a, --action <type>', 'choose action')
+  .option('-i, --id <type>', 'user id')
+  .option('-n, --name <type>', 'user name')
+  .option('-e, --email <type>', 'user email')
+  .option('-p, --phone <type>', 'user phone')
+
+program.parse(process.argv)
+
+const argv = program.opts()
+
+// TODO: рефакторить
+function invokeAction({ action, id, name, email, phone }) {
+  switch (action) {
+    case 'list':
+      // ...
+      break
+
+    case 'get':
+      // ... id
+      break
+
+    case 'add':
+      // ... name email phone
+      break
+
+    case 'remove':
+      // ... id
+      break
+
+    default:
+      console.warn('\x1B[31m Unknown action type!')
+  }
+}
+
+invokeAction(argv)
+```
 ## Крок 5
 
 Запусти команди в терміналі і зроби окремий скріншот результату виконання кожної

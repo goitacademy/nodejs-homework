@@ -2,8 +2,6 @@
 
 # Домашнее задание 1
 
-Создай ветку `01-node-basics` из ветки `master`.
-
 ## Шаг 1
 
 - Инициализируй npm в проекте
@@ -98,13 +96,56 @@ function invokeAction({ action, id, name, email, phone }) {
 invokeAction(argv);
 ```
 
+Так же, вы можете использовать модуль [commander](https://www.npmjs.com/package/commander) для парсинга аргументов командной строки. Это более популярная альтернатива модуля `yargs`
+
+```js
+const { Command } = require('commander')
+const program = new Command()
+program
+  .option('-a, --action <type>', 'choose action')
+  .option('-i, --id <type>', 'user id')
+  .option('-n, --name <type>', 'user name')
+  .option('-e, --email <type>', 'user email')
+  .option('-p, --phone <type>', 'user phone')
+
+program.parse(process.argv)
+
+const argv = program.opts()
+
+// TODO: рефакторить
+function invokeAction({ action, id, name, email, phone }) {
+  switch (action) {
+    case 'list':
+      // ...
+      break
+
+    case 'get':
+      // ... id
+      break
+
+    case 'add':
+      // ... name email phone
+      break
+
+    case 'remove':
+      // ... id
+      break
+
+    default:
+      console.warn('\x1B[31m Unknown action type!')
+  }
+}
+
+invokeAction(argv)
+```
+
 ## Шаг 5
 
 Запусти команды в терминале и сделай отдельный скриншот результата выполнения
 каждой команды.
 
 ```shell
-# Получаем и выводим весь список контакстов в виде таблицы (console.table)
+# Получаем и выводим весь список контактов в виде таблицы (console.table)
 node index.js --action="list"
 
 # Получаем контакт по id
