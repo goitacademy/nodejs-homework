@@ -86,46 +86,46 @@ ResponseBody: {
 }
 ```
 
-## Крок 3
+## Шаг 3
 
-### Додавання відправки email користувачу з посиланням для верифікації
+### Добавление отправки email пользователю с ссылкой для верификации
 
-При створення користувача при реєстрації:
+При создания пользователя при регистрации:
 
-- створити `verificationToken` для користувача і записати його в БД (для генерації токена використовуйте пакет [uuid](https://www.npmjs.com/package/uuid) або [nanoid](https://www.npmjs.com/package/nanoid))
-- відправити email на пошту користувача і вказати посилання для верифікації email'а ( `/users/verify/:verificationToken`) в повідомленні
-- Так само необхідно враховувати, що тепер логін користувача не дозволено, якщо не верифікувано email
+- создать `verificationToken` для пользователя и записать его в БД (для генерации токена используйте пакет [uuid](https://www.npmjs.com/package/uuid) или [nanoid](https://www.npmjs.com/package/nanoid))
+- отправить email на почту пользователя и указать ссылку для верификации email'а (`/users/verify/:verificationToken`) в сообщении
+- Так же необходимо учитывать, что теперь логин пользователя не разрешен при не верифицированном email
 
-## Крок 4
+## Шаг 4
 
-### Додавання повторної відправки email користувачу з посиланням для верифікації
+### Добавление повторной отправки email пользователю с ссылкой для верификации
 
-Необхідно передбачити, варіант, що користувач може випадково видалити лист. Воно може не дійти з якоїсь причини до адресата. Наш сервіс відправки листів під час реєстрації видав помилку і т.д.
+Необходимо предусмотреть, вариант, что пользователь может случайно удалить письмо. Оно может не дойти по какой-то причине к адресату. Наш сервис отправки писем во время регистрации выдал ошибку и т.д.
 
-#### @ POST /users/verify
+#### @ POST /users/verify/
 
-- Отримує `body` в форматі `{email}`
-- Якщо в `body` немає обов'язкового поля `email`, повертає json з ключем `{"message":"missing required field email"}` і статусом `400`
-- Якщо з `body` все добре, виконуємо повторну відправку листа з `verificationToken` на вказаний email, але тільки якщо користувач не верифікований
-- Якщо користувач вже пройшов верифікацію відправити json з ключем `{"message":"Verification has already been passed"}` зі статусом `400 Bad Request`
+- Получает `body` в формате `{ email }`
+- Если в `body` нет обязательного поля `email`, возвращает json с ключом `{"message": "missing required field email"}` и статусом `400`
+- Если с `body` все хорошо, выполняем повторную отправку письма с `verificationToken` на указанный email, но только если пользователь не верифицирован
+- Если пользователь уже прошел верификацию отправить json с ключом `{ message: "Verification has already been passed"}` со статусом `400 Bad Request`
 
 #### Resending a email request
 
-````shell
+```shell
 POST /users/verify
 Content-Type: application/json
 RequestBody: {
   "email": "example@example.com"
 }
-`` `
+```
 
 #### Resending a email validation error
 
 ```shell
 Status: 400 Bad Request
 Content-Type: application/json
-ResponseBody: <Помилка від Joi або іншої бібліотеки валідації>
-````
+ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
+```
 
 #### Resending a email success response
 
@@ -145,7 +145,6 @@ Content-Type: application/json
 ResponseBody: {
   message: "Verification has already been passed"
 }
-`` `
-
-> Примітка: Як альтернативу SendGrid можна використовувати пакет [nodemailer](https://www.npmjs.com/package/nodemailer)
 ```
+
+> Примечание: Как альтернативу SendGrid можно использовать пакет [nodemailer](https://www.npmjs.com/package/nodemailer)

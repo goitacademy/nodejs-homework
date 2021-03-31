@@ -88,15 +88,64 @@ ResponseBody: {
 
 ## Крок 3
 
-### Додавання відправки email'а користувачеві з посиланням для верифікації
+### Додавання відправки email користувачу з посиланням для верифікації
 
-Після створення користувача при реєстрації:
+При створення користувача при реєстрації:
 
-- створити `verificationToken` для зареєстрованого користувача і записати його в БД (для генерації токена використовуйте [uuid](https://www.npmjs.com/package/uuid))
-- відправити email на пошту користувача і вказати посилання для верифікації email'а (`/auth/verify/:verificationToken`) в [html повідомлення](https://app.gitbook.com/@reloaderlev/s/goit-node-js-new-program/email-rozsilka/sendgrid.-vidpravka-email-iv-cherez-paket-sendgrid-mail)
+- створити `verificationToken` для користувача і записати його в БД (для генерації токена використовуйте пакет [uuid](https://www.npmjs.com/package/uuid) або [nanoid](https://www.npmjs.com/package/nanoid))
+- відправити email на пошту користувача і вказати посилання для верифікації email'а ( `/users/verify/:verificationToken`) в повідомленні
+- Так само необхідно враховувати, що тепер логін користувача не дозволено, якщо не верифікувано email
 
 ## Крок 4
 
-### Перевірка правильності роботи
+### Додавання повторної відправки email користувачу з посиланням для верифікації
 
-[Умови, зазначені на початку завдання](#як-має-працювати-в-кінцевому-результаті), повинні працювати
+Необхідно передбачити, варіант, що користувач може випадково видалити лист. Воно може не дійти з якоїсь причини до адресата. Наш сервіс відправки листів під час реєстрації видав помилку і т.д.
+
+#### @ POST /users/verify
+
+- Отримує `body` в форматі `{email}`
+- Якщо в `body` немає обов'язкового поля `email`, повертає json з ключем `{"message":"missing required field email"}` і статусом `400`
+- Якщо з `body` все добре, виконуємо повторну відправку листа з `verificationToken` на вказаний email, але тільки якщо користувач не верифікований
+- Якщо користувач вже пройшов верифікацію відправити json з ключем `{"message":"Verification has already been passed"}` зі статусом `400 Bad Request`
+
+#### Resending a email request
+
+````shell
+POST /users/verify
+Content-Type: application/json
+RequestBody: {
+  "email": "example@example.com"
+}
+`` `
+
+#### Resending a email validation error
+
+```shell
+Status: 400 Bad Request
+Content-Type: application/json
+ResponseBody: <Помилка від Joi або іншої бібліотеки валідації>
+````
+
+#### Resending a email success response
+
+```shell
+Status: 200 Ok
+Content-Type: application/json
+ResponseBody: {
+  "message": "Verification email sent"
+}
+```
+
+#### Resend email for verified user
+
+```shell
+Status: 400 Bad Request
+Content-Type: application/json
+ResponseBody: {
+  message: "Verification has already been passed"
+}
+`` `
+
+> Примітка: Як альтернативу SendGrid можна використовувати пакет [nodemailer](https://www.npmjs.com/package/nodemailer)
+```
