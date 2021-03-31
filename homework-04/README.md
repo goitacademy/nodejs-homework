@@ -44,7 +44,7 @@
 
 ### Регистрация
 
-Создать эндпоинт [`/users/signup`](#registration-request)
+Создайте эндпоинт [`/users/signup`](#registration-request)
 
 Сделать валидацию всех обязательных полей (`email` и `password`). При ошибке валидации вернуть
 [Ошибку валидации](#registration-validation-error).
@@ -98,7 +98,7 @@ ResponseBody: {
 
 ### Логин
 
-Создать эндпоинт [`/users/login`](#login-request)
+Создайте эндпоинт [`/users/login`](#login-request)
 
 В модели `User` найти пользователя по `email`.
 
@@ -153,7 +153,7 @@ ResponseBody: {
 
 ### Проверка токена
 
-Создай мидлвар для проверки токена и добавь его ко всем маршрутам, которые должны быть защищены.
+Создайте мидлвар для проверки токена и добавь его ко всем маршрутам, которые должны быть защищены.
 
 - Мидлвар берет токен из заголовков `Authorization`, проверяет токен на валидность.
 - В случае ошибки вернуть [Ошибку Unauthorized](#middleware-unauthorized-error).
@@ -175,9 +175,9 @@ ResponseBody: {
 
 ### Логаут
 
-Создать ендпоинт [`/users/logout`](#logout-request)
+Создайте ендпоинт [`/users/logout`](#logout-request)
 
-Добавь в маршрут мидлвар проверки токена.
+Добавьте в маршрут мидлвар проверки токена.
 
 - В модели `User` найти пользователя по `_id`.
 - Если пользователя не существует вернуть [Ошибку Unauthorized](#logout-unauthorized-error).
@@ -187,7 +187,7 @@ ResponseBody: {
 
 ```shell
 POST /users/logout
-Authorization: "Bearer token"
+Authorization: "Bearer {{token}}"
 ```
 
 #### Logout unauthorized error
@@ -206,11 +206,12 @@ ResponseBody: {
 Status: 204 No Content
 ```
 
-### Текущий - получить данные юзера по токену
+## Шаг 5
+### Текущий пользователь - получить данные юзера по токену
 
-Создать ендпоинт [`/users/current`](#current-user-request)
+Создайте эндпоинт [`/users/current`](#current-user-request)
 
-Добавь в маршрут мидлвар проверки токена.
+Добавьте в маршрут мидлвар проверки токена.
 
 - Если пользователя не существует вернуть [Ошибку Unauthorized](#current-user-unauthorized-error)
 - В противном случае вернуть [Успешный ответ](#current-user-success-response)
@@ -219,7 +220,7 @@ Status: 204 No Content
 
 ```shell
 GET /users/current
-Authorization: "Bearer token"
+Authorization: "Bearer {{token}}"
 ```
 
 #### Current user unauthorized error
@@ -239,7 +240,7 @@ Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
   "email": "example@example.com",
-  "subscription": "free"
+  "subscription": "starter"
 }
 ```
 
