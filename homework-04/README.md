@@ -14,7 +14,7 @@
 {
   password: {
     type: String,
-    required: [true, 'Set password for user'],
+    required: [true, 'Password is required'],
   },
   email: {
     type: String,
@@ -26,7 +26,10 @@
     enum: ["starter", "pro", "business"],
     default: "starter"
   },
-  token: String
+  token: {
+    type: String,
+    default: null,
+  },
 }
 ```
 
