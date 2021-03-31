@@ -67,3 +67,13 @@ REST API повинен підтримувати такі раути.
 - Якщо `body` немає, повертає json з ключем `{"message": "missing fields"}` і статусом `400`
 - Якщо з `body` всі добре, викликає функцію `updateContact(contactId, body)`. (Напиши її) для поновлення контакту в файлі `contacts.json`
 - За результатом роботи функції повертає оновлений об'єкт контакту і статусом `200`. В іншому випадку, повертає json з ключем `"message": "Not found"` і статусом `404`
+
+## Крок 3
+
+Для маршрутів, що приймають дані (`POST`,` PUT`, `PATCH`), продумайте перевірку (валідацію) отриманих даних. Для валідації прийнятих даних можна використовувати один з пакетів - валідаторів даних, а не писати перевірки самостійно:
+
+1. [joi](https://github.com/sideway/joi)
+2. [express-validator](https://github.com/express-validator/express-validator)
+3. [yup](https://github.com/jquense/yup)
+
+<img src="validator.png" width="640">

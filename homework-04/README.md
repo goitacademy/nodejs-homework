@@ -2,30 +2,35 @@
 
 # Домашнее задание 4
 
-Создай ветку `04-auth` из ветки `master`.
+Создайте ветку `hw04-auth` из ветки `master`.
 
-Продолжи создание REST API для работы с коллекцией контактов. Добавь логику
-аутентификации/авторизации пользователя через [JWT](https://jwt.io/).
+Продолжите создание REST API для работы с коллекцией контактов. Добавьте логику аутентификации/авторизации пользователя с помощью [JWT](https://jwt.io/).
 
 ## Шаг 1
 
-В коде создай схему и модель пользователя для коллекции `users`.
+В коде создайте схему и модель пользователя для коллекции `users`.
 
 ```js
 {
-  email: String,
-  password: String,
+  password: {
+    type: String,
+    required: [true, 'Set password for user'],
+  },
+  email: {
+    type: String,
+    required: [true, 'Email is required'],
+    unique: true,
+  },
   subscription: {
     type: String,
-    enum: ["free", "pro", "premium"],
-    default: "free"
+    enum: ["starter", "pro", "business"],
+    default: "starter"
   },
   token: String
 }
 ```
 
-Измените схему контактов, чтобы каждый пользователь видел только свои контакты.
-Для этого в схеме контактов добавьте свойство
+Чтобы каждый пользователь работал и видел только свои контакты в схеме контактов добавьте свойство `owner`
 
 ```js
     owner: {
@@ -33,28 +38,26 @@
       ref: 'user',
     }
 ```
+Примечание: `'user'` - название модели пользователя
 
 ## Шаг 2
 
 ### Регистрация
 
-Создать ендпоинт [`/auth/register`](#registration-request)
+Создать эндпоинт [`/users/signup`](#registration-request)
 
-Сделать валидацию всех обязательных полей (email и password). При ошибке
-валидации вернуть [Ошибку валидации](#registration-validation-error).
+Сделать валидацию всех обязательных полей (`email` и `password`). При ошибке валидации вернуть
+[Ошибку валидации](#registration-validation-error).
 
-В случае успешной валидации в модели `User` создать пользователя по данным
-которые прошли валидацию. Для засолки паролей используй
-[bcrypt](https://www.npmjs.com/package/bcrypt)
+В случае успешной валидации в модели `User` создать пользователя по данным которые прошли валидацию. Для засолки паролей используй [bcrypt](https://www.npmjs.com/package/bcrypt) или [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 
-- Если почта уже используется кем-то другим, вернуть
-  [Ошибку Conflict](#registration-conflict-error).
+- Если почта уже используется кем-то другим, вернуть [Ошибку Conflict](#registration-conflict-error).
 - В противном случае вернуть [Успешный ответ](#registration-success-response).
 
 #### Registration request
 
 ```shell
-POST /auth/register
+POST /users/signup
 Content-Type: application/json
 RequestBody: {
   "email": "example@example.com",
@@ -67,7 +70,7 @@ RequestBody: {
 ```shell
 Status: 400 Bad Request
 Content-Type: application/json
-ResponseBody: <Ошибка от Joi или другой валидационной библиотеки>
+ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
 ```
 
 #### Registration conflict error
@@ -88,30 +91,26 @@ Content-Type: application/json
 ResponseBody: {
   "user": {
     "email": "example@example.com",
-    "subscription": "free"
+    "subscription": "starter"
   }
 }
 ```
 
 ### Логин
 
-Создать ендпоинт [`/auth/login`](#login-request)
+Создать эндпоинт [`/users/login`](#login-request)
 
 В модели `User` найти пользователя по `email`.
 
-Сделать валидацию всех обязательных полей (email и password). При ошибке
-валидации вернуть [Ошибку валидации](#validation-error-login).
+Сделать валидацию всех обязательных полей (`email` и `password`). При ошибке валидации вернуть [Ошибку валидации](#validation-error-login).
 
-- В противном случае, сравнить пароль для найденного юзера, если пароли
-  совпадают создать токен, сохранить в текущем юзере и вернуть
-  [Успешный ответ](#login-success-response).
-- Если пароль или имейл неверный, вернуть
-  [Ошибку Unauthorized](#login-auth-error).
+- В противном случае, сравнить пароль для найденного юзера, если пароли совпадают создать токен, сохранить в текущем юзере и вернуть [Успешный ответ](#login-success-response).
+- Если пароль или email неверный, вернуть [Ошибку Unauthorized](#login-auth-error).
 
 #### Login request
 
 ```shell
-POST /auth/login
+POST /users/login
 Content-Type: application/json
 RequestBody: {
   "email": "example@example.com",
@@ -124,7 +123,7 @@ RequestBody: {
 ```shell
 Status: 400 Bad Request
 Content-Type: application/json
-ResponseBody: <Ошибка от Joi или другой валидационной библиотеки>
+ResponseBody: <Ошибка от Joi или другой библиотеки  валидации>
 ```
 
 #### Login success response
@@ -136,7 +135,7 @@ ResponseBody: {
   "token": "exampletoken",
   "user": {
     "email": "example@example.com",
-    "subscription": "free"
+    "subscription": "starter"
   }
 }
 ```
@@ -145,23 +144,22 @@ ResponseBody: {
 
 ```shell
 Status: 401 Unauthorized
-ResponseBody: Email or password is wrong
+ResponseBody: {
+  "message": "Email or password is wrong"
+}
 ```
 
 ## Шаг 3
 
 ### Проверка токена
 
-Создай мидлвар для проверки токена и добавь его ко всем раутам которые должны
-быть защищены.
+Создай мидлвар для проверки токена и добавь его ко всем маршрутам, которые должны быть защищены.
 
-- Мидлвар берет токен из заголовков `Authorization`, проверяет токен на
-  валидность.
+- Мидлвар берет токен из заголовков `Authorization`, проверяет токен на валидность.
 - В случае ошибки вернуть [Ошибку Unauthorized](#middleware-unauthorized-error).
-- Если валидация прошла успешно, получить из токена id пользователя. Найти
-  пользователя в базе данных по этому id. Если пользователь существует, записать
-  его данные в `req.user` и вызвать `next()`. Если пользователя с таким id не
-  существет, вернуть [Ошибку Unauthorized](#middleware-unauthorized-error)
+- Если валидация прошла успешно, получить из токена `id` пользователя. Найти пользователя в базе данных по этому id. 
+- Если пользователь существует и токен совпадает с тем, что находится в базе, записать его данные в `req.user` и вызвать метод`next()`. 
+- Если пользователя с таким `id` не существует или токены не совпадают, вернуть [Ошибку Unauthorized](#middleware-unauthorized-error)
 
 #### Middleware unauthorized error
 
@@ -177,20 +175,18 @@ ResponseBody: {
 
 ### Логаут
 
-Создать ендпоинт [`/auth/logout`](#logout-request)
+Создать ендпоинт [`/users/logout`](#logout-request)
 
-Добавь в раут мидлвар проверки токена.
+Добавь в маршрут мидлвар проверки токена.
 
 - В модели `User` найти пользователя по `_id`.
-- Если пользователя не сущестует вернуть
-  [Ошибку Unauthorized](#logout-unauthorized-error).
-- В противном случае, удалить токен в текущем юзере и вернуть
-  [Успешный ответ](#logout-success-response).
+- Если пользователя не существует вернуть [Ошибку Unauthorized](#logout-unauthorized-error).
+- В противном случае, удалить токен в текущем юзере и вернуть [Успешный ответ](#logout-success-response).
 
 #### Logout request
 
 ```shell
-POST /auth/logout
+POST /users/logout
 Authorization: "Bearer token"
 ```
 
@@ -214,10 +210,9 @@ Status: 204 No Content
 
 Создать ендпоинт [`/users/current`](#current-user-request)
 
-Добавь в раут мидлвар проверки токена.
+Добавь в маршрут мидлвар проверки токена.
 
-- Если пользователя не сущестует вернуть
-  [Ошибку Unauthorized](#current-user-unauthorized-error)
+- Если пользователя не существует вернуть [Ошибку Unauthorized](#current-user-unauthorized-error)
 - В противном случае вернуть [Успешный ответ](#current-user-success-response)
 
 #### Current user request
@@ -250,9 +245,6 @@ ResponseBody: {
 
 ## Дополнительное задание - необязательное
 
-- Сделать пагинацию с
-  [mongoose-paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2) для
-  коллекции контактов (GET /contacts?page=1&limit=20).
-- Сделать фильтрацию контактов по типу подписки (GET /contacts?sub=free)
-- Обновление подписки (`subscription`) пользователя через ендпоинт PATCH /users.
-  Подписка должна иметь одно из следующих значений `['free', 'pro', 'premium']`
+- Сделать пагинацию с [mongoose-paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2) для коллекции контактов (GET /contacts?page=1&limit=20).
+- Сделать фильтрацию контактов по полю избранного (GET /contacts?favorite=true)
+- Обновление подписки (`subscription`) пользователя через эндпоинт `PATCH` `/users`. Подписка должна иметь одно из следующих   значений `['starter', 'pro', 'business']`
