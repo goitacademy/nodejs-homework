@@ -145,7 +145,6 @@ Content-Type: application/json
 ResponseBody: {
   message: "Verification has already been passed"
 }
-`` `
+```
 
 > Примітка: Як альтернативу SendGrid можна використовувати пакет [nodemailer](https://www.npmjs.com/package/nodemailer)
-```
