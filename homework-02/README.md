@@ -7,7 +7,7 @@
 github аккаунт.
 
 Посмотри поясняющее видео как это сделать и сдавать ДЗ правильно:
-[![Title](./js.png)](https://www.youtube.com/watch?v=wabSW_sz_cM 'Пояснение')
+[<img src="./js.png" width="640">](https://www.youtube.com/watch?v=wabSW_sz_cM 'Пояснение')
 
 Написать REST API для работы с коллекцией контактов. Для работы с REST API используй [Postman](https://www.getpostman.com/).
 
@@ -71,3 +71,14 @@ REST API должен поддерживать следующие рауты.
 - Если `body` нет, возвращает json с ключом `{"message": "missing fields"}` и статусом `400`
 - Если с `body` все хорошо, вызывает функцию `updateContact(contactId, body)` (напиши ее) для обновления контакта в файле `contacts.json`
 - По результату работы функции возвращает обновленный объект контакта и статусом `200`. В противном случае, возвращает json с ключом `"message": "Not found"` и статусом `404`
+
+
+## Шаг 3
+
+Для маршрутов, что принимают данные (`POST`, `PUT`, `PATCH`), продумайте проверку (валидацию) принимаемых данных. Для валидации принимаемых данных можно использовать один из пакетов – валидаторов данных, а не писать проверки самостоятельно:
+
+1. [joi](https://github.com/sideway/joi)
+2. [express-validator](https://github.com/express-validator/express-validator)
+3. [yup](https://github.com/jquense/yup)
+
+<img src="validator.png" width="640">
