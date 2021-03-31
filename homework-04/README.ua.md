@@ -110,7 +110,7 @@ ResponseBody: {
 #### Login request
 
 ```shell
-POST /auth/login
+POST /users/login
 Content-Type: application/json
 RequestBody: {
   "email": "example@example.com",
