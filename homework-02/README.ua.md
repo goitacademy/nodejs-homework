@@ -3,78 +3,77 @@
 # Домашнє завдання 2
 
 Подивися пояснюче відео як це зробити та здавати ДЗ правильно:
-[![Title](https://i9.ytimg.com/vi_webp/wabSW_sz_cM/mqdefault.webp?time=1614170400000&sqp=CKCS2YEG&rs=AOn4CLDRrwPZrvzNeTmlGdxi49LPARaViA)]
-(https://www.youtube.com/watch?v=wabSW_sz_cM ' пояснення')
+[![Title](./js.png)](https://www.youtube.com/watch?v=wabSW_sz_cM ' пояснення')
 
-Написати REST API для роботи з колекцією контактів. Для роботи з REST API
-використовуй [Postman] (https://www.getpostman.com/).
+Написати REST API для роботи з колекцією контактів. Для роботи з REST API використовуй [Postman] (https://www.getpostman.com/).
 
-Прочитай уважно readme в клонованому темплейті, там описаний механізм здачі
-домашніх завдань. Та починай виконувати ДЗ
+Прочитай уважно readme в клонованому темплейті, там описаний механізм здачі домашніх завдань. Та починай виконувати ДЗ
 
 ## Крок 1
 
-Встанови в командою
+Створи гілку `hw02-express` з гілки master.
+
+Встанови в командою пакети
 
 ```bash
 npm i
 ```
 
-такі пакети в проекті [express](https://www.npmjs.com/package/express),
-[morgan](https://www.npmjs.com/package/morgan) та
-[cors](https://www.npmjs.com/package/cors).
+Такі пакети є в проекті: 
+- [express](https://www.npmjs.com/package/express)
+- [morgan](https://www.npmjs.com/package/morgan)
+- [cors](https://www.npmjs.com/package/cors)
 
 ## Крок 2
 
-У index.js веб сервер на express і додаємо прошарку morgan і cors. налаштовуй
-раутінг для роботи з колекцією контактів.
+У `app.js` – веб сервер на `express` і прошарки `morgan` і `cors`. Почни налаштовувати раутінг для роботи з колекцією контактів.
 
 REST API повинен підтримувати такі раути.
 
 ### @ GET /api/contacts
 
 - нічого не отримує
-- викликає функцію `listContacts` для роботи з json-файлом contacts.json
-- повертає масив всіх контактів в json-форматі зі статусом 200
+- викликає функцію `listContacts` для роботи з json-файлом `contacts.json`
+- повертає масив всіх контактів в json-форматі зі статусом `200`
 
 ### @ GET /api/contacts/:contactId
 
-- Не отримує body
+- Не отримує `body`
 - Отримує параметр `contactId`
-- викликає функцію getById для роботи з json-файлом contacts.json
-- якщо такий id є, повертає об'єкт контакту в json-форматі зі статусом 200
-- якщо такого id немає, повертає json з ключем `"message": "Not found"` і
-  статусом 404
+- викликає функцію `getById` для роботи з json-файлом `contacts.json`
+- якщо такий `id` є, повертає об'єкт контакту в json-форматі зі статусом `200`
+- якщо такого `id` немає, повертає json з ключем `"message": "Not found"` і статусом `404`
 
 ### @ POST /api/contacts
 
-- Отримує body в форматі `{name, email, phone}`
-- Якщо в body немає якихось обов'язкових полів, повертає json з ключем
-  `{"message": "missing required name field"}` і статусом 400
-- Якщо з body все добре, додає унікальний ідентифікатор в об'єкт контакту
-- Викликає функцію `addContact(body)` для збереження контакту в файлі
-  contacts.json
-- За результатом роботи функції повертає об'єкт з доданим id
-  `{id, name, email, phone}` і статусом 201
+- Отримує `body` в форматі `{name, email, phone}`
+- Якщо в `body` немає якихось обов'язкових полів, повертає json з ключем `{"message": "missing required name field"}` і статусом `400`
+- Якщо з `body` все добре, додає унікальний ідентифікатор в об'єкт контакту
+- Викликає функцію `addContact(body)` для збереження контакту в файлі `contacts.json`
+- За результатом роботи функції повертає об'єкт з доданим `id` `{id, name, email, phone}` і статусом `201`
 
 ### @ DELETE /api/contacts/:contactId
 
-- Не отримує body
+- Не отримує `body`
 - Отримує параметр `contactId`
-- Викликає функцію `removeContact` для роботи з json-файлом contacts.json
-- якщо такий id є, повертає json формату `{"message": "contact deleted"}` і
-  статусом 200
-- якщо такого id немає, повертає json з ключем `"message": "Not found"` і
-  статусом 404
+- Викликає функцію `removeContact` для роботи з json-файлом `contacts.json`
+- якщо такий `id` є, повертає json формату `{"message": "contact deleted"}` і статусом `200`
+- якщо такого `id` немає, повертає json з ключем `"message": "Not found"` і статусом `404`
 
-### @ PATCH /api/contacts/:contactId
+### @ PUT /api/contacts/:contactId
 
 - Отримує параметр `contactId`
-- Отримує body в json-форматі c оновленням будь-яких полів `name, email и phone`
-- Якщо body немає, повертає json з ключем `{"message": "missing fields"}` і
-  статусом 400
-- Якщо з body всі добре, викликає функцію `updateContact(contactId, body)`
-  (Напиши її) для поновлення контакту в файлі contacts.json
-- За результатом роботи функції повертає оновлений об'єкт контакту і
-  статусом 200. В іншому випадку, повертає json з ключем
-  `"message": "Not found"` і статусом 404
+- Отримує `body` в json-форматі c оновленням будь-яких полів `name, email и phone`
+- Якщо `body` немає, повертає json з ключем `{"message": "missing fields"}` і статусом `400`
+- Якщо з `body` всі добре, викликає функцію `updateContact(contactId, body)`. (Напиши її) для поновлення контакту в файлі `contacts.json`
+- За результатом роботи функції повертає оновлений об'єкт контакту і статусом `200`. В іншому випадку, повертає json з ключем `"message": "Not found"` і статусом `404`
+
+## Крок 3
+
+Для маршрутів, що приймають дані (`POST`,` PUT`, `PATCH`), продумайте перевірку (валідацію) отриманих даних. Для валідації прийнятих даних можна використовувати один з пакетів - валідаторів даних, а не писати перевірки самостійно:
+
+1. [joi](https://github.com/sideway/joi)
+2. [express-validator](https://github.com/express-validator/express-validator)
+3. [yup](https://github.com/jquense/yup)
+
+<img src="validator.png" width="640">
