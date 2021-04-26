@@ -13,16 +13,13 @@
 
 ## Шаг 2
 
-В корне проекта создай папку `db`. Для хранения контактов скачай и используй
-файл [contacts.json](./contacts.json), положив его в папку `db`.
+В корне проекта создай папку `db`. Для хранения контактов скачай и используй файл [contacts.json](./contacts.json), положив его в папку `db`.
 
 В корне проекта создай файл `contacts.js`.
 
 - Сделай импорт модулей `fs` и `path` для работы с файловой системой
-- Создай переменную `contactsPath` и запиши в нее путь к файле `contacts.json`.
-  Для составления пути ипользуй методы модуля `path`.
-- Добавь функции для работы с коллекцией контактов. В функциях используй модуль
-  `fs` и его методы `readFile()` и `writeFile()`
+- Создай переменную `contactsPath` и запиши в нее путь к файле `contacts.json`. Для составления пути ипользуй методы модуля `path`.
+- Добавь функции для работы с коллекцией контактов. В функциях используй модуль `fs` и его методы `readFile()` и `writeFile()`
 - Сделай экспорт созданных функций через `module.exports`
 
 ```js
@@ -53,16 +50,11 @@ function addContact(name, email, phone) {
 
 ## Шаг 3
 
-Сделай импорт модуля `contacts.js` в файле `index.js` и проверь
-работоспособность функций для работы с контактами.
+Сделай импорт модуля `contacts.js` в файле `index.js` и проверь работоспособность функций для работы с контактами.
 
 ## Шаг 4
 
-В файле `index.js` импортируется пакет `yargs` для удобного парса аргументов
-командной строки. Используй готовую функцию `invokeAction()` которая получает
-тип выполняемого действия и необходимые аргументы. Функция вызывает
-соответствующий метод из файла `contacts.js` передавая ему необходимые
-аргументы.
+В файле `index.js` импортируется пакет `yargs` для удобного парса аргументов командной строки. Используй готовую функцию `invokeAction()` которая получает тип выполняемого действия и необходимые аргументы. Функция вызывает соответствующий метод из файла `contacts.js` передавая ему необходимые аргументы.
 
 ```js
 // index.js
@@ -98,61 +90,60 @@ invokeAction(argv);
 Так же, вы можете использовать модуль [commander](https://www.npmjs.com/package/commander) для парсинга аргументов командной строки. Это более популярная альтернатива модуля `yargs`
 
 ```js
-const { Command } = require('commander')
-const program = new Command()
+const { Command } = require('commander');
+const program = new Command();
 program
   .option('-a, --action <type>', 'choose action')
   .option('-i, --id <type>', 'user id')
   .option('-n, --name <type>', 'user name')
   .option('-e, --email <type>', 'user email')
-  .option('-p, --phone <type>', 'user phone')
+  .option('-p, --phone <type>', 'user phone');
 
-program.parse(process.argv)
+program.parse(process.argv);
 
-const argv = program.opts()
+const argv = program.opts();
 
 // TODO: рефакторить
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
       // ...
-      break
+      break;
 
     case 'get':
       // ... id
-      break
+      break;
 
     case 'add':
       // ... name email phone
-      break
+      break;
 
     case 'remove':
       // ... id
-      break
+      break;
 
     default:
-      console.warn('\x1B[31m Unknown action type!')
+      console.warn('\x1B[31m Unknown action type!');
   }
 }
 
-invokeAction(argv)
+invokeAction(argv);
 ```
 
 ## Шаг 5
 
-Запусти команды в терминале и сделай отдельный скриншот результата выполнения
-каждой команды.
+Запусти команды в терминале и сделай отдельный скриншот результата выполнения каждой команды.
 
 ```shell
 # Получаем и выводим весь список контактов в виде таблицы (console.table)
-node index.js --action="list"
+node index.js --action list
 
 # Получаем контакт по id
-node index.js --action="get" --id=5
+node index.js --action get --id 5
 
 # Добавялем контакт
-node index.js --action="add" --name="Mango" --email="mango@gmail.com" --phone="322-22-22"
+node index.js --action add --name Mango --email mango@gmail.com --phone 322-22-22
 
 # Удаляем контакт
-node index.js --action="remove" --id=3
+node index.js --action remove --id=3
 ```

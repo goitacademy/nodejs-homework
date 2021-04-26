@@ -3,3 +3,4 @@ app.js
 package*
 .DS_Store
 .vscode/
+.idea
