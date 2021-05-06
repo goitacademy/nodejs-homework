@@ -6,25 +6,20 @@
 
 - Ініціалізується npm в проекті
 - В корені проекту створи файл `index.js`
-- Постав пакет [nodemon](https://www.npmjs.com/package/nodemon) як залежність
-  [nodemon](https://www.npmjs.com/package/nodemon) як залежність розробки
-  (devDependencies)
+- Постав пакет [nodemon](https://www.npmjs.com/package/nodemon) як залежність [nodemon](https://www.npmjs.com/package/nodemon) як залежність розробки (devDependencies)
 - В файлі `package.json` додай "скрипти" для запуску `index.js`
   - Скрипт `start` який запускає `index.js` с помощью `node`
   - Скрипт `dev` який запускає `index.js` за допомогою `nodemon`
 
 ## Крок 2
 
-У корені проекту створи папку `db`. Ддля зберігання контактів завантаж і
-використовуй файл [contacts.json](./contacts.json), поклавши його в папку `db`.
+У корені проекту створи папку `db`. Ддля зберігання контактів завантаж і використовуй файл [contacts.json](./contacts.json), поклавши його в папку `db`.
 
 У корені проекту створи файл `contacts.js`.
 
 - Зроби імпорт модулів `fs` і `path` для роботи з файловою системою
-- Створи змінну `contactsPath` і запиши в неї шлях до файлі `contacts.json`. Для
-  складання шляху використовуй методи модуля `path`.
-- Додай функції для роботи з колекцією контактів. У функціях використовуй модуль
-  `fs` и его методы `readFile()` і `writeFile()`
+- Створи змінну `contactsPath` і запиши в неї шлях до файлі `contacts.json`. Для складання шляху використовуй методи модуля `path`.
+- Додай функції для роботи з колекцією контактів. У функціях використовуй модуль `fs` и его методы `readFile()` і `writeFile()`
 - Зроби експорт створених функцій через `module.exports`
 
 ```js
@@ -55,15 +50,11 @@ function addContact(name, email, phone) {
 
 ## Крок 3
 
-Зроби імпорт модуля `contacts.js` в файлі `index.js` и проверь работоспособность
-функций для работы с контактами.
+Зроби імпорт модуля `contacts.js` в файлі `index.js` и проверь работоспособность функций для работы с контактами.
 
 ## Крок 4
 
-В файлі `index.js` імпортується пакет `yargs` для зручного парса аргументів
-командного рядка. Використовуй готову функцію `invokeAction()` яка отримує тип
-виконуваної дії і необхідні аргументи. Функція викликає відповідний метод з
-файлу `contacts.js` передаючи йому необхідні аргументи.
+В файлі `index.js` імпортується пакет `yargs` для зручного парса аргументів командного рядка. Використовуй готову функцію `invokeAction()` яка отримує тип виконуваної дії і необхідні аргументи. Функція викликає відповідний метод з файлу `contacts.js` передаючи йому необхідні аргументи.
 
 ```js
 // index.js
@@ -99,49 +90,49 @@ invokeAction(argv);
 Так само, ви можете використовувати модуль [commander] (https://www.npmjs.com/package/commander) для парсинга аргументів командного рядка. Це більш популярна альтернатива модуля `yargs`
 
 ```js
-const { Command } = require('commander')
-const program = new Command()
+const { Command } = require('commander');
+const program = new Command();
 program
   .option('-a, --action <type>', 'choose action')
   .option('-i, --id <type>', 'user id')
   .option('-n, --name <type>', 'user name')
   .option('-e, --email <type>', 'user email')
-  .option('-p, --phone <type>', 'user phone')
+  .option('-p, --phone <type>', 'user phone');
 
-program.parse(process.argv)
+program.parse(process.argv);
 
-const argv = program.opts()
+const argv = program.opts();
 
 // TODO: рефакторить
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
       // ...
-      break
+      break;
 
     case 'get':
       // ... id
-      break
+      break;
 
     case 'add':
       // ... name email phone
-      break
+      break;
 
     case 'remove':
       // ... id
-      break
+      break;
 
     default:
-      console.warn('\x1B[31m Unknown action type!')
+      console.warn('\x1B[31m Unknown action type!');
   }
 }
 
-invokeAction(argv)
+invokeAction(argv);
 ```
+
 ## Крок 5
 
-Запусти команди в терміналі і зроби окремий скріншот результату виконання кожної
-команди.
+Запусти команди в терміналі і зроби окремий скріншот результату виконання кожної команди.
 
 ```shell
 # Отримуємо і виводимо весь список контактів у вигляді таблиці (console.table)
@@ -156,3 +147,18 @@ node index.js --action="add" --name="Mango" --email="mango@gmail.com" --phone="3
 # Видаляємо контакт
 node index.js --action="remove" --id=3
 ```
+
+## Крок 6 - Здача домашнього завдання.
+
+Скріншоти виконання команд, можна залити на будь-який безкоштовний хмарний сервіс зберігання картинок (Приклад: [monosnap](https://monosnap.com/), [imgbb.com](https://imgbb.com/)) і відповідні посилання необхідно додати в файл README.md. Створіть цей файл в корені проекту. Після прикріпіть посилання на сховище з домашнім завданням в [schoology](https://app.schoology.com/login) для перевірки ментором.
+
+## Критерії прийому
+
+- Створено репозиторій з домашнім завданням &mdash; CLI додаток
+- Завдання відправлено менторові в [schoology](https://app.schoology.com/login) на перевірку (посилання на репозиторій)
+- Код відповідає технічному завданню проекту
+- При виконанні коду не виникає необроблених помилок
+- Назва змінних, властивостей і методів починається з малої літери і записуються в нотації CamelCase. Використовуються англійські іменники
+- Назва функції або методу містить дієслово
+- У коді немає закоментованих ділянок коду
+- Проект коректно працює з актуальною LTS-версією Node
