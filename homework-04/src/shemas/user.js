@@ -24,11 +24,12 @@ const userSchema = new Schema(
     },
     subscription: {
       type: String,
-      enum: {
-        values: [Subscription.STARTER, Subscription.PRO, Subscription.BUSINESS],
-        default: 'starter',
-        message: 'This subscription isn\t allowed',
-      },
+      default: 'starter',
+      // enum: {
+      //   values: [Subscription.STARTER, Subscription.PRO, Subscription.BUSINESS],
+      //   default: 'starter',
+      //   message: 'This subscription isn\t allowed',
+      // },
     },
     token: {
       type: String,

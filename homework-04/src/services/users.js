@@ -15,7 +15,9 @@ class UsersService {
     return data;
   }
   async create(body) {
+    console.log(body);
     const data = await this.repositories.users.create(body);
+    console.log(data);
     return data;
   }
   async updateSubscription(id, subscription) {

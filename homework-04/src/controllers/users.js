@@ -5,6 +5,7 @@ const serviceAuth = new AuthService();
 
 const reg = async (req, res, next) => {
   const { name, email, password } = req.body;
+  console.log('registraton user');
   const user = await serviceUser.findByEmail(email);
   if (user) {
     return next({
@@ -15,6 +16,7 @@ const reg = async (req, res, next) => {
   }
   try {
     const newUser = await serviceUser.create({ name, email, password });
+    console.log(newUser);
     return res.status(HttpCode.CREATED).json({
       status: 'success',
       code: HttpCode.CREATED,
@@ -75,8 +77,7 @@ async function updateSubscription(req, res, next) {
   try {
     const id = req.user.id;
     const subscription = req.body.subscription;
-    await Users.updateSubscription(id, subscription);
-
+    await serviceUser.updateSubscription(id, subscription);
     return res.status(HttpCode.OK).json({
       status: 'success',
       code: HttpCode.OK,

@@ -7,6 +7,7 @@ const schemaCreateUser = Joi.object({
     .pattern(/\S+@\S+\.\S+/)
     .required(),
   password: Joi.string().required(),
+  name: Joi.string(),
 });
 
 const schemaUpdateSubscription = Joi.object({
