@@ -1,11 +1,11 @@
 const { nanoid } = require("nanoid");
 
 const fs = require("fs").promises;
-const contactsPath = require("../utils/contactsPath");
+const contactsPath = require("../../utils/contactsPath");
 
-const addContact = async (name, email, phone) => {
+const addContact = async ({ name, email, phone }) => {
   const allContactsJSON = await fs.readFile(contactsPath, "utf8");
-  // console.log(allContactsJSON);
+  // console.log(name, email, phone);
   const newContact = {
     name,
     email,
@@ -18,7 +18,7 @@ const addContact = async (name, email, phone) => {
   allContacts.push(newContact);
   const newContactsJSON = JSON.stringify(allContacts);
   fs.writeFile(contactsPath, JSON.stringify(allContacts));
-  return `Adding is successful. Contact ${JSON.stringify(newContact)} is added`;
+  return JSON.stringify(newContact);
 };
 
 module.exports = addContact;
