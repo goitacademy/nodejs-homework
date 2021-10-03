@@ -1,16 +1,16 @@
 const { NotFound } = require('http-errors');
 
 const { sendSuccessRes } = require('../../utils');
-const contactsOperations = require('../../model/contacts');
+const { Contact } = require('../../models/contacts');
 
 const getAllContacts = async (req, res, next) => {
-	const contacts = await contactsOperations.getAllContacts();
+	const contacts = await Contact.find({}, '_id name email phone');
 	sendSuccessRes(res, { contacts });
 };
 
 const getContactById = async (req, res, next) => {
 	const { id } = req.params;
-	const contactById = await contactsOperations.getContactById(id);
+	const contactById = await Contact.findById(id, '_id name email phone');
 	if (!contactById) {
 		throw new NotFound(`Product with id=${id} not found`);
 	}
@@ -18,18 +18,15 @@ const getContactById = async (req, res, next) => {
 };
 
 const addContact = async (req, res, next) => {
-	const contact = await contactsOperations.addContact(req.body);
+	const contact = await Contact.create(req.body);
 	sendSuccessRes(res, { contact }, 201);
 };
 
 const updateContactById = async (req, res, next) => {
 	const { id } = req.params;
-	const updatedContact = await contactsOperations.updateContactById(
-		id,
-		req.body,
-	);
-	// console.log(req.body);
-	// console.log(id);
+	const updatedContact = await Contact.findByIdAndUpdate(id, req.body, {
+		new: true,
+	});
 	if (!updatedContact) {
 		throw new NotFound(`Product with id=${id} not found`);
 	}
@@ -38,11 +35,27 @@ const updateContactById = async (req, res, next) => {
 
 const removeContactById = async (req, res, next) => {
 	const { id } = req.params;
-	const removedContact = await contactsOperations.removeContactById(id);
+	const removedContact = await Contact.findByIdAndDelete(id);
 	if (!removedContact) {
 		throw new NotFound(`Product with id=${id} not found`);
 	}
 	sendSuccessRes(res, { removedContact });
+};
+
+const updateFavoriteContact = async (req, res, next) => {
+	const { id } = req.params;
+	const { favorite } = req.body;
+	const updatedContact = await Contact.findByIdAndUpdate(
+		id,
+		{ favorite },
+		{
+			new: true,
+		},
+	);
+	if (!updatedContact) {
+		throw new NotFound(`Product with id=${id} not found`);
+	}
+	sendSuccessRes(res, { updatedContact });
 };
 
 module.exports = {
@@ -51,4 +64,5 @@ module.exports = {
 	addContact,
 	updateContactById,
 	removeContactById,
+	updateFavoriteContact,
 };
