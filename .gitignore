@@ -4,6 +4,7 @@ package*
 .DS_Store
 .vscode/
 .idea
+.env
 homework-03/.env
 # Logs
 
