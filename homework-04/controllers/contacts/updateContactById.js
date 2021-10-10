@@ -8,10 +8,11 @@ const updateContactById = async (req, res, next) => {
 	const updatedContact = await Contact.findByIdAndUpdate(id, req.body, {
 		new: true,
 	});
+	const { _id, name, email, phone, favorite, owner } = updatedContact;
 	if (!updatedContact) {
 		throw new NotFound(`Product with id=${id} not found`);
 	}
-	sendSuccessRes(res, { updatedContact });
+	sendSuccessRes(res, { _id, name, email, phone, favorite, owner });
 };
 
 module.exports = updateContactById;

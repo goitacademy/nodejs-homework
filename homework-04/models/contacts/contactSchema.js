@@ -1,11 +1,10 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const phoneRegexp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
-
 const emailRegexp =
 	/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
-
 const nameRegexp =
 	/^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
 
@@ -32,9 +31,15 @@ const mongoContactSchema = Schema(
 			type: Boolean,
 			default: false,
 		},
+		owner: {
+			type: Schema.Types.ObjectId,
+			ref: 'user',
+		},
 	},
 	{ versionKey: false, timestamps: true },
 );
+
+mongoContactSchema.plugin(mongoosePaginate);
 
 const updateFavoriteContactJoiSchema = Joi.object({
 	favorite: Joi.boolean().required(),
@@ -48,9 +53,23 @@ const joiContactSchema = Joi.object({
 });
 
 const Contact = model('contact', mongoContactSchema);
+Contact.paginate().then({});
 
 module.exports = {
 	joiContactSchema,
 	updateFavoriteContactJoiSchema,
 	Contact,
 };
+
+// const mongoose = require('mongoose');
+// const mongoosePaginate = require('mongoose-paginate-v2');
+
+// const mySchema = new mongoose.Schema({
+//   /* your schema definition */
+// });
+
+// mySchema.plugin(mongoosePaginate);
+
+// const myModel = mongoose.model('SampleModel', mySchema);
+
+// myModel.paginate().then({}); // Usage

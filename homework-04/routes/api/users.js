@@ -1,8 +1,13 @@
 const express = require('express');
 
-const { controllerWrapper, validation } = require('../../middlewares');
-const { auth: ctrl } = require('../../controllers/auth');
-const { joiSchema } = require('../../models/auth/authSchema');
+const {
+	controllerWrapper,
+	validation,
+	authenticate,
+} = require('../../middlewares');
+const { users: ctrl } = require('../../controllers/users');
+const { joiSchema } = require('../../models/users/authSchema');
+const { updateUserSubscription } = require('../../models/users/authSchema');
 
 const router = express.Router();
 
@@ -13,7 +18,7 @@ const router = express.Router();
 4. Вихід(Логаут)
 */
 
-// api/auth/register - повний шлях
+// api/users/register - повний шлях
 
 router.post('/signup', validation(joiSchema), controllerWrapper(ctrl.signup));
 // router.post("/register");
@@ -21,7 +26,16 @@ router.post('/signup', validation(joiSchema), controllerWrapper(ctrl.signup));
 router.post('/login', validation(joiSchema), controllerWrapper(ctrl.login));
 // router.post("/signin")
 
-router.get('/logout', controllerWrapper(ctrl.logout));
+router.get('/logout', authenticate, controllerWrapper(ctrl.logout));
 // router.post("/signout")
+
+router.get('/current', authenticate, controllerWrapper(ctrl.getCurrentUser));
+
+router.patch(
+	'/',
+	authenticate,
+	validation(updateUserSubscription),
+	controllerWrapper(ctrl.updateUserSubscription),
+);
 
 module.exports = router;

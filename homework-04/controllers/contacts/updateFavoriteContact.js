@@ -13,10 +13,11 @@ const updateFavoriteContact = async (req, res, next) => {
 			new: true,
 		},
 	);
+	const { _id, name, email, phone, owner } = updatedContact;
 	if (!updatedContact) {
 		throw new NotFound(`Product with id=${id} not found`);
 	}
-	sendSuccessRes(res, { updatedContact });
+	sendSuccessRes(res, { _id, name, email, phone, favorite, owner });
 };
 
 module.exports = updateFavoriteContact;
