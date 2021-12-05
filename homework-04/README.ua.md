@@ -38,7 +38,7 @@
       ref: 'user',
     }
 ```
-Примітка: `'user'` - назва моделі користувача
+Примітка: `'user'` - назва колекції, у якій зберігаються користувачі
 
 ## Крок 2
 
@@ -109,7 +109,7 @@ ResponseBody: {
 #### Login request
 
 ```shell
-POST /users/login
+GET /users/login
 Content-Type: application/json
 RequestBody: {
   "email": "example@example.com",
@@ -246,6 +246,6 @@ ResponseBody: {
 
 ## Додаткове завдання - необов'язкове
 
-- Зробити пагінацію з [mongoose-paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2) для колекції контактів (GET /contacts?page=1&limit=20).
+- Зробити пагінацію для колекції контактів (GET /contacts?page=1&limit=20).
 - Зробити фільтрацію контактів по полю обраного (GET /contacts?favorite=true)
 - Оновлення підписки (`subscription`) користувача через ендпоінт` PATCH` `/users`. Підписка повинна мати одне з наступних значень `['starter', 'pro', 'business']`
