@@ -38,33 +38,33 @@ REST API должен поддерживать следующие рауты.
 - вызывает функцию `listContacts` для работы с json-файлом `contacts.json`
 - возвращает массив всех контактов в json-формате со статусом `200`
 
-### @ GET /api/contacts/:contactId
+### @ GET /api/contacts/:id
 
 - Не получает `body`
-- Получает параметр `contactId`
+- Получает параметр `id`
 - вызывает функцию getById для работы с json-файлом contacts.json
 - если такой id есть, возвращает объект контакта в json-формате со статусом `200`
 - если такого id нет, возвращает json с ключом `"message": "Not found"` и статусом `404`
 
 ### @ POST /api/contacts
 
-- Получает `body` в формате `{name, email, phone}`
+- Получает `body` в формате `{name, email, phone}` (все поля обязательны)
 - Если в body нет каких-то обязательных полей, возвращает json с ключом `{"message": "missing required name field"}` и статусом `400`
 - Если с `body` все хорошо, добавляет уникальный идентификатор в объект контакта
 - Вызывает функцию `addContact(body)` для сохранения контакта в файле `contacts.json`
 - По результату работы функции возвращает объект с добавленным `id` `{id, name, email, phone}` и статусом `201`
 
-### @ DELETE /api/contacts/:contactId
+### @ DELETE /api/contacts/:id
 
 - Не получает `body`
-- Получает параметр `contactId`
+- Получает параметр `id`
 - вызывает функцию `removeContact` для работы с json-файлом `contacts.json`
 - если такой `id` есть, возвращает json формата `{"message": "contact deleted"}` и статусом `200`
 - если такого `id` нет, возвращает json с ключом `"message": "Not found"` и статусом `404`
 
-### @ PUT /api/contacts/:contactId
+### @ PUT /api/contacts/:id
 
-- Получает параметр `contactId`
+- Получает параметр `id`
 - Получает `body` в json-формате c обновлением любых полей `name, email и phone`
 - Если `body` нет, возвращает json с ключом `{"message": "missing fields"}` и статусом `400`
 - Если с `body` все хорошо, вызывает функцию `updateContact(contactId, body)` (напиши ее) для обновления контакта в файле `contacts.json`
@@ -72,13 +72,7 @@ REST API должен поддерживать следующие рауты.
 
 ## Шаг 3
 
-Для маршрутов, что принимают данные (`POST`, `PUT`, `PATCH`), продумайте проверку (валидацию) принимаемых данных. Для валидации принимаемых данных можно использовать один из пакетов – валидаторов данных, а не писать проверки самостоятельно:
-
-1. [joi](https://github.com/sideway/joi)
-2. [express-validator](https://github.com/express-validator/express-validator)
-3. [yup](https://github.com/jquense/yup)
-
-<img src="validator.png" width="640">
+Для маршрутов, что принимают данные (`POST`, `PUT`, `PATCH`), продумайте проверку (валидацию) принимаемых данных. Для валидации принимаемых данных используйте пакет [joi](https://github.com/sideway/joi)
 
 ## Критерии приема дз #2-6
 

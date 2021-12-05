@@ -148,3 +148,7 @@ ResponseBody: {
 ```
 
 > Примітка: Як альтернативу SendGrid можна використовувати пакет [nodemailer](https://www.npmjs.com/package/nodemailer)
+
+## Додаткове завдання - необов'язкове
+
+### 1. Напишіть dockerfile для вашої програми
