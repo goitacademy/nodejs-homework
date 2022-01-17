@@ -72,7 +72,7 @@ ResponseBody: {
 
 ## Дополнительное задание - необязательное
 
-### 1. Написать unit-тесты для контроллера входа (signup)
+### 1. Написать unit-тесты для контроллера входа (login/signin)
 
 При помощи [Jest](https://jestjs.io/ru/docs/getting-started)
 
