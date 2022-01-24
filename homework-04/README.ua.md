@@ -34,7 +34,7 @@
 
 ```js
     owner: {
-      type: SchemaTypes.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'user',
     }
 ```
