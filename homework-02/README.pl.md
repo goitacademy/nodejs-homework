@@ -1,14 +1,18 @@
-**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+**Читать на других языках: Czytaj w innych językach: [rosyjski](README.md), [ukraiński](README.ua.md).**
 
-# Домашнее задание 2
+# Домашнее задание 2 Zadanie domowe 2
 
 Создай форк [репозитория](https://github.com/goitacademy/nodejs-homework-template) в свой github аккаунт.
+Utwórz fork [repozytorium](https://github.com/goitacademy/nodejs-homework-template)
 
 Посмотри поясняющее видео как это сделать и сдавать ДЗ правильно: [<img src="./js.png" width="640">](https://www.youtube.com/watch?v=wabSW_sz_cM 'Пояснение')
+Obejrzyj wideo wyjaśniające, jak to zrobić i odać pracę domową prawidłowo: [<img src="./js.png" width="640">](https://www.youtube.com/watch?v=wabSW_sz_cM 'Пояснение').
 
 Написать REST API для работы с коллекцией контактов. Для работы с REST API используй [Postman](https://www.getpostman.com/).
+Napisz REST API do pracy ze zbiorem kontaktów. Do pracy z REST API wykorzystaj [Postman](https://www.getpostman.com/).
 
 Прочитай внимательно readme в клонированном бойлерплейте, там описан механизм сдачи домашних заданий. Приступай к выполнению ДЗ
+Przeczytaj uważnie readme w sklonowanym boilerplate, opisany tam zostałm mechanizm oddawania pracy domowej. Zacznik wykonywać zadanie domowe.
 
 ## Шаг 1
 
