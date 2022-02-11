@@ -173,9 +173,14 @@ Screenshoty wykonania poleceń można wysłać na dowolną, bezpłatną chmurę 
 - Задание отправлено ментору в [schoology](https://app.schoology.com/login) на проверку (ссылка на репозиторий)
 - Zadanie wysłane do mentora na [schoology](https://app.schoology.com/login) w celu sprawdzenia (odnośnik do repozytorium).
 - Код соответствует техническому заданию проекта
-- Kod odpowiada 
+- Kod odpowiada technicznemu zadaniu projekta.
 - При выполнении кода не возникает необработанных ошибок
+- Przy wykonaniu kodu nie pojawiają się nieopracowane błędy.
 - Название переменных, свойств и методов начинается со строчной буквы и записываются в нотации CamelCase. Используются английские существительные
+- Nazwanie zmiennych, właściwości i metod zaczyna się z małej litery i zapisuje w notacji CamelCase. Wykorzystywane są angielskie rzeczowniki.
 - Название функции или метода содержит глагол
+- Nazwa funkcji albo metoda zawiera czasownik.
 - В коде нет закомментированных участков кода
+- W kodzie nie ma skomentowanych fragmentów kodu.
 - Проект корректно работает в актуальной LTS-версии Node
+- Projekt pracuje poprawnie w aktualnej wersji LTS Node.
