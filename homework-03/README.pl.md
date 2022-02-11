@@ -1,22 +1,28 @@
-**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+**Czytaj w innych językach: [rosyjski](README.md), [ukraiński](README.ua.md).**
 
-# Домашнее задание 3
+# Домашнее задание 3 Zadanie domowe 3
 
 Создай ветку `hw03-mongodb` из ветки `master`.
+Utwórz gałąź `hw03-mongodb` z gałęzi `master`.
 
 Продолжи создание REST API для работы с коллекцией контактов.
+Kontynuuj tworzenie REST API do pracy ze zbiorem kontaktów.
 
-## Шаг 1
+## Шаг 1 Krok 1
 
 Создай аккаунт на [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). После чего в аккаунте создай новый проект и настрой **бесплатный кластер**. Во время настройки кластера выбери провайдера и регион как на скриншоте ниже. Если выбрать слишком удаленный регион, скорость ответа сервера будет дольше.
 
+Stwórz konto na [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), a następnie na koncie utwórz nowy projekt i skonfiguruj **bezpłatny klaster**. W czasie konfigurowania klasteru wybierz provider i region, jak na screenshocie poniżej. Jeżeli wybierzez zbyt oddalony region, serwer odpowie wolniej.
+
 ![atlas cluster setup](./atlas-cluster.jpg)
 
-## Шаг 2
+## Шаг 2 Krok 2
 
-Установи графический редактор [MongoDB Compass](https://www.mongodb.com/download-center/compass) для удобной работы с базой данных для MongoDB. Настрой подключение своей облачной базы данных к Compass. В MongoDB Atlas не забудь создать пользователя с правами администратора.
+Установи графический редактор [MongoDB Compass](https://www.mongodb.com/download-center/compass) c для удобной работы с базой данных для MongoDB. Настрой подключение своей облачной базы данных к Compass. В MongoDB Atlas не забудь создать пользователя с правами администратора.
 
-## Шаг 3
+Skonfiguruj edytor graficzny [MongoDB Compass](https://www.mongodb.com/download-center/compass) dla wygodnej pracy z bazą danych dla MongoDB. Skonfiguruj podłączenie swojej chmury do Compass. W MongoDB Atlas nie zapomnij utworzyć użytkownika z prawami administratora.
+
+## Шаг 3 Krok 3
 
 Через Compass создай базу данных `db-contacts` и в ней коллекцию `contacts`. Возьми [ссылка на json](./contacts.json) и при помощи Compass наполни коллекцию `contacts` (сделай импорт) его содержимым.
 
