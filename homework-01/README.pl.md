@@ -1,6 +1,6 @@
 **Читать на других языках: Czytaj w innych językach: [rosyjski](README.md), [ukraiński](README.ua.md).**
 
-# Домашнее задание 1 Praca domowa 1
+# Домашнее задание 1 Zadanie domowe 1
 
 ## Шаг 1 Krok 1
 
