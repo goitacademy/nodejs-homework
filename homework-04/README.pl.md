@@ -1,10 +1,12 @@
-**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+**Czytaj w innych językach: [rosyjski](README.md), [ukraiński](README.ua.md).**
 
-# Домашнее задание 4
+# Домашнее задание 4 Zadanie domowe 4
 
 Создайте ветку `hw04-auth` из ветки `master`.
+Utwórz gałąź `hw04-auth` z gałęzi `master`.
 
 Продолжите создание REST API для работы с коллекцией контактов. Добавьте логику аутентификации/авторизации пользователя с помощью [JWT](https://jwt.io/).
+Kontynuuj tworzenie REST API do pracy ze zbiorem kontaktów. Dodaj logikę uwierzytelnienia/utoryzacji użytkownika przy pomocy [JWT](https://jwt.io/).
 
 ## Шаг 1
 
