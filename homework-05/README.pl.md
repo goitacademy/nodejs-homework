@@ -50,7 +50,7 @@ Content-Type: multipart/form-data
 Authorization: "Bearer {{token}}"
 RequestBody: załadowany plik
 
-# Pomyślna odpowiedź
+# Poprawna odpowiedź
 Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
