@@ -1,33 +1,23 @@
 **Czytaj w innych językach: [rosyjski](README.md), [ukraiński](README.ua.md).**
 
-# Домашнее задание 6 Zadanie domowe 6
+# Zadanie domowe 6
 
-Создай ветку `hw06-email` из ветки `master`.
 Utwórz gałąź `hw06-email` z gałęzi `master`.
-
-Продолжаем создание REST API для работы с коллекцией контактов. Добавьте верификацию email пользователя после регистрации при помощи сервиса [SendGrid](https://sendgrid.com/).
 
 Kontynuujemy tworzenie REST API pracy ze zbiorem kontaktów. Dodaj weryfikację emaila użytkownika po rejestracji przy pomocy serwisu [SendGrid](https://sendgrid.com/).
 
-## Как процесс верификации должен работать
-Jak powinien działać proces weryfikacji
+## Jak powinien działać proces weryfikacji
 
-1. После регистрации, пользователь должен получить письмо на указанную при регистрации почту с ссылкой для верификации своего email
-Po rejestracji użytkownik powinien otrzymać wiadomość na wskazaną przy rejestracji pocztę z odnośnikiem do weryfikacji swojego emaila.
-3. Пройдя ссылке в полученном письме, в первый раз, пользователь должен получить [Ответ со статусом 200](#verification-success-response), что будет подразумевать успешную верификацию email
-Przechodząc do odnośnika w otrzymanej woadomości po raz pierwszy, użytkownik powinien otrzymać [Odpowiedź ze statusem 200](#verification-success-response), co będzie oznaczać pomyślną weryfikację emaila.
-5. Пройдя по ссылке повторно пользователь должен получить [Ошибку со статусом 404](#verification-user-not-found)
-Przechodząc po odnośniku powtórnie użytkownik powinien otrzymać [Błąd ze statusem 404](#verification-user-not-found).
+1. Po rejestracji użytkownik powinien otrzymać wiadomość na wskazaną przy rejestracji pocztę z odnośnikiem do weryfikacji swojego emaila.
+2. Przechodząc do odnośnika w otrzymanej wiadomości po raz pierwszy, użytkownik powinien otrzymać [Odpowiedź ze statusem 200](#verification-success-response), co będzie oznaczać pomyślną weryfikację emaila.
+3. Przechodząc po odnośniku powtórnie użytkownik powinien otrzymać [Błąd ze statusem 404](#verification-user-not-found).
 
-## Шаг 1 Krok 1
+## Krok 1
 
-### Подготовка интеграции с SendGrid API
-Przygotowanie integracji z SendGrid API
+### Przygotowanie integracji z SendGrid API
 
-- Зарегистрируйся на [SendGrid](https://sendgrid.com/).
-Zarejestruj się na [SendGrid](https://sendgrid.com/).
-- Создай email-отправителя. Для это в административной панели SendGrid зайдите в меню Marketing в подменю senders и в правом верхнем углу нажмите кнопку "Create New Sender". Заполните необходимые поля в предложенной форме. Сохраните. Должен получится следующий как на картинке результат, только с вашим email:
-Utwórz email nadawcy. W tym celu w panelu administratora SendGrid przejdź do menu Marketing w podmenu senders i w prawym górnym rogu wciśnij przycisk "Create New Sender".
+- Zarejestruj się na [SendGrid](https://sendgrid.com/).
+- Utwórz email nadawcy. W tym celu w panelu administratora SendGrid przejdź do menu Marketing w podmenu senders i w prawym górnym rogu wciśnij przycisk "Create New Sender". Uzupełnij wymagane pola w dołączonym formularzu. Zapisz. Rezultat powinien wyglądać jak na obrazku, tylko z twoim adresem email:
 
 ![sender](sender-not-verify.png)
 
