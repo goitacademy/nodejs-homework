@@ -60,7 +60,7 @@ Schemat modeli dla zbioru `contacts`:
 
 W naszych kontaktach pojawiło się dodatkowe pole statusu `favorite`, które przyjmuje logiczną wartość `true` lub `false`. Odpowiada ono za to, że wskazany kontakt znajduje się lub nie w ulubionych. Zrealizuj dla aktualizacji statusu kontaktu nową trasę.
 
-### @ PATCH /api/contacts/:contactId/favorite
+### @ PATCH /api/contacts/:id/favorite
 
 - Otrzymuje parametr `contactId`.
 - Otrzymuje `body` w formacie json z aktualizacją pola `favorite`.
