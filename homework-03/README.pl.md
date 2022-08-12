@@ -16,7 +16,7 @@ Stwórz konto na [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), a następ
 
 Skonfiguruj edytor graficzny [MongoDB Compass](https://www.mongodb.com/download-center/compass) do wygodnej pracy z bazą danych dla MongoDB. Skonfiguruj podłączenie swojej chmury do Compass. W MongoDB Atlas nie zapomnij utworzyć użytkownika z prawami administratora.
 
-## Шаг 3 Krok 3
+## Krok 3
 
 Przez Compass utwórz bazę danych `db-contacts`, a w niej zbiór `contacts`. Weź [odnośnik do json](./contacts.json) i przy pomocy Compass wypełnij zbiór `contacts` (zaimportuj) jego zawartością.
 
@@ -65,7 +65,7 @@ W naszych kontaktach pojawiło się dodatkowe pole statusu `favorite`, które pr
 - Otrzymuje parametr `contactId`.
 - Otrzymuje `body` w formacie json z aktualizacją pola `favorite`.
 - Jeżeli `body` nie ma, zwraca json z kluczem `{"message": "missing field favorite"}` i statusem `400`.
-- Если с `body` все хорошо, вызывает функцию `updateStatusContact(contactId, body)` (напиши ее) для обновления контакта в базе
+- Jeżeli w `body` wszystko się zgadza to wywołaj funkcję `updateStatusContact(contactId, body)` (napisz ją), aby zaktualizować kontakt w bazie danych
 - W wyniku pracy funkcji zwraca zaktualizowany obiekt kontaktu ze statusem `200`. W przeciwnym razie zwraca json z kluczem `"message": "Not found"` i statusem `404`.
 
 
