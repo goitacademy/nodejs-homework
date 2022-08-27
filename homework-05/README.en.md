@@ -13,7 +13,7 @@ Create a folder `public` for distribution of statics. In this folder make a fold
 Put any image in the `public/avatars` folder and check that the static distribution works. When you navigate to such a URL, the browser will display the image.
 
 ```shell
-http://localhost:<порт>/avatars/<filename with extension>
+http://localhost:<port>/avatars/<filename with extension>
 ```
 
 ## Step 2
