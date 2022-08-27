@@ -1,66 +1,66 @@
-**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+**Read in other languages: [Russian](README.md), [Ukrainian](README.ua.md).**
 
-# Домашнее задание 1
+# Homework 1
 
-## Шаг 1
+## Step 1
 
-- Инициализируй npm в проекте
-- В корне проекта создай файл `index.js`
-- Поставь пакет [nodemon](https://www.npmjs.com/package/nodemon) как зависимость разработки (devDependencies)
-- В файле `package.json` добавь "скрипты" для запуска `index.js`
-- Скрипт `start` который запускает `index.js` с помощью `node`
-- Скрипт `start:dev` который запускает `index.js` с помощью `nodemon`
+- Initialize npm in the project
+- In the root of the project, create a file `index.js`
+- Install package [nodemon](https://www.npmjs.com/package/nodemon) as development dependency (devDependencies)
+- In `package.json` file add "scripts" to run `index.js`
+- `start` script that starts `index.js` with `node`
+- `start:dev` script that starts `index.js` with `nodemon`
 
-## Шаг 2
+## Step 2
 
-В корне проекта создай папку `db`. Для хранения контактов скачай и используй файл [contacts.json](./contacts.json), положив его в папку `db`.
+Create a folder `db` in the root of the project. To store contacts, download and use the [contacts.json](./contacts.json) file, putting it in the `db` folder.
 
-В корне проекта создай файл `contacts.js`.
+At the root of the project, create a `contacts.js` file.
 
-- Сделай импорт модулей `fs` и `path` для работы с файловой системой
-- Создай переменную `contactsPath` и запиши в нее путь к файле `contacts.json`. Для составления пути используй методы модуля `path`.
-- Добавь функции для работы с коллекцией контактов. В функциях используй модуль `fs` и его методы `readFile()` и `writeFile()`
-- Сделай экспорт созданных функций через `module.exports`
+- Make imports of modules `fs` and `path` to work with the file system
+- Create a `contactsPath` variable and put the path to the `contacts.json` file in it. To compose a path, use the methods of the `path` module.
+- Add functions to work with a collection of contacts. In functions, use the `fs` module and its `readFile()` and `writeFile()` methods
+- Make export of created functions via `module.exports`
 
 ```js
 // contacts.js
 
 /*
- * Раскомментируй и запиши значение
+ * Uncomment and write down the value
  * const contactsPath = ;
  */
 
-// TODO: задокументировать каждую функцию
+// TODO: document each function
 function listContacts() {
-  // ...твой код
+  // ...your code
 }
 
 function getContactById(contactId) {
-  // ...твой код
+  // ...your code
 }
 
 function removeContact(contactId) {
-  // ...твой код
+  // ...your code
 }
 
 function addContact(name, email, phone) {
-  // ...твой код
+  // ...your code
 }
 ```
 
-## Шаг 3
+## Step 3
 
-Сделай импорт модуля `contacts.js` в файле `index.js` и проверь работоспособность функций для работы с контактами.
+Make an import of the `contacts.js` module in the `index.js` file and check the functionality of the functions for working with contacts.
 
-## Шаг 4
+## Step 4
 
-В файле `index.js` импортируется пакет `yargs` для удобного парса аргументов командной строки. Используй готовую функцию `invokeAction()` которая получает тип выполняемого действия и необходимые аргументы. Функция вызывает соответствующий метод из файла `contacts.js` передавая ему необходимые аргументы.
+The `index.js` file imports the `yargs` package for convenient parsing of command line arguments. Use the ready-made function `invokeAction()` which receives the type of action to be performed and the required arguments. The function calls the appropriate method from the `contacts.js` file, passing it the necessary arguments.
 
 ```js
 // index.js
 const argv = require('yargs').argv;
 
-// TODO: рефакторить
+// TODO: refactor
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
@@ -87,7 +87,7 @@ function invokeAction({ action, id, name, email, phone }) {
 invokeAction(argv);
 ```
 
-Так же, вы можете использовать модуль [commander](https://www.npmjs.com/package/commander) для парсинга аргументов командной строки. Это более популярная альтернатива модуля `yargs`
+Alternatively, you can use the [commander](https://www.npmjs.com/package/commander) module to parse command line arguments. This is a more popular alternative to the `yargs` module
 
 ```js
 const { Command } = require('commander');
@@ -103,7 +103,7 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторить
+// TODO: refactor
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
@@ -130,35 +130,35 @@ function invokeAction({ action, id, name, email, phone }) {
 invokeAction(argv);
 ```
 
-## Шаг 5
+## Step 5
 
-Запусти команды в терминале и сделай отдельный скриншот результата выполнения каждой команды.
+Run the commands in the terminal and take a separate screenshot of the result of each command.
 
 ```shell
-# Получаем и выводим весь список контактов в виде таблицы (console.table)
+# Get and display the entire list of contacts in the form of a table (console.table)
 node index.js --action list
 
-# Получаем контакт по id
+# Get contact by id
 node index.js --action get --id 5
 
-# Добавялем контакт
+# Add the contact
 node index.js --action add --name Mango --email mango@gmail.com --phone 322-22-22
 
-# Удаляем контакт
+# Delete the contact
 node index.js --action remove --id 3
 ```
 
-## Шаг 6 - Сдача домашнего задания.
+## Step 6 - Homework submission
 
-Скриншоты выполнения команд, можно залить на любой бесплатный облачный сервис хранения картинок (Пример: [monosnap](https://monosnap.com/), [imgbb.com](https://imgbb.com/)) и соответствующие ссылки необходимо добавить в файл README.md. Создайте этот файл в корне проекта. После прикрепите ссылку на репозиторий с домашним заданием в [schoology](https://app.schoology.com/login) для проверки ментором.
+Command execution screenshots can be uploaded to any free cloud image storage service (Example: [monosnap](https://monosnap.com/), [imgbb.com](https://imgbb.com/)) and the corresponding links are necessary add to the README.md file. Create this file at the root of the project. Then attach a link to the homework repository at [schoology](https://app.schoology.com/login) for mentor to check.
 
-## Критерии приема
+## Admission criteria
 
-- Создан репозиторий с домашним заданием &mdash; CLI приложение
-- Задание отправлено ментору в [schoology](https://app.schoology.com/login) на проверку (ссылка на репозиторий)
-- Код соответствует техническому заданию проекта
-- При выполнении кода не возникает необработанных ошибок
-- Название переменных, свойств и методов начинается со строчной буквы и записываются в нотации CamelCase. Используются английские существительные
-- Название функции или метода содержит глагол
-- В коде нет закомментированных участков кода
-- Проект корректно работает в актуальной LTS-версии Node
+- You created a repository with homework &mdash; CLI application
+- The assignment has been sent to the mentor at [schoology](https://app.schoology.com/login) for review (repository link)
+- The code corresponds to the terms of reference of the project
+- No unhandled errors when executing code
+- The names of variables, properties and methods start with a lowercase letter and are written in CamelCase notation. English nouns are used
+- The name of the function or method contains a verb
+- There are no commented sections of code in the code
+- The project works correctly in the current LTS version of Node
