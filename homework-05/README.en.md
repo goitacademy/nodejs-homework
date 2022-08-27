@@ -70,11 +70,6 @@ ResponseBody: {
 - Move the user's avatar from the tmp folder to the `public/avatars` folder and give it a unique name for the specific user.
 - The resulting `URL` `/avatars/<file name with extension>` save in the user's `avatarURL` field
 
-## Дополнительное задание - необязательное
-
-### 1. Написать unit-тесты для контроллера входа (login/signin)
-
-При помощи [Jest](https://jestjs.io/ru/docs/getting-started)
 
 ## Additional task - optional
 
