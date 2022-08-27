@@ -1,14 +1,14 @@
-**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+**Read in other languages: [Russian](README.md), [Ukrainian](README.ua.md).**
 
-# Домашнее задание 4
+# Homework 4
 
-Создайте ветку `hw04-auth` из ветки `master`.
+Create a `hw04-auth` branch from the `master` branch.
 
-Продолжите создание REST API для работы с коллекцией контактов. Добавьте логику аутентификации/авторизации пользователя с помощью [JWT](https://jwt.io/).
+Continue building a REST API to work with the contact collection. Add user authentication/authorization logic using [JWT](https://jwt.io/).
 
-## Шаг 1
+## Step 1
 
-В коде создайте схему и модель пользователя для коллекции `users`.
+In code, create a user schema and model for the `users` collection.
 
 ```js
 {
@@ -33,7 +33,7 @@
 }
 ```
 
-Чтобы каждый пользователь работал и видел только свои контакты в схеме контактов добавьте свойство `owner`
+For each user to work and see only their contacts in the contact scheme, add the `owner` property
 
 ```js
     owner: {
@@ -41,21 +41,21 @@
       ref: 'user',
     }
 ```
-Примечание: `'user'` - название коллекции (в единственном числе), в которой хранятся пользователи.
+Note: `'user'` is the name of the collection (singular) in which users are stored.
 
-## Шаг 2
+## Step 2
 
-### Регистрация
+### Registration
 
-Создайте эндпоинт [`/users/signup`](#registration-request)
+Create an endpoint [`/users/signup`](#registration-request)
 
-Сделать валидацию всех обязательных полей (`email` и `password`). При ошибке валидации вернуть
-[Ошибку валидации](#registration-validation-error).
+Validate all required fields (`email` and `password`). Return on validation error
+[Validation error](#registration-validation-error).
 
-В случае успешной валидации в модели `User` создать пользователя по данным которые прошли валидацию. Для засолки паролей используй [bcrypt](https://www.npmjs.com/package/bcrypt) или [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+In case of successful validation in the `User` model, create a user according to the data that has passed validation. For password salting use [bcrypt](https://www.npmjs.com/package/bcrypt) or [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 
-- Если почта уже используется кем-то другим, вернуть [Ошибку Conflict](#registration-conflict-error).
-- В противном случае вернуть [Успешный ответ](#registration-success-response).
+- If the mail is already in use by someone else, return [Error Conflict](#registration-conflict-error).
+- Otherwise return [Successful response](#registration-success-response).
 
 #### Registration request
 
@@ -73,7 +73,7 @@ RequestBody: {
 ```shell
 Status: 400 Bad Request
 Content-Type: application/json
-ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
+ResponseBody: <Error from Joi or another validation library>
 ```
 
 #### Registration conflict error
@@ -99,16 +99,17 @@ ResponseBody: {
 }
 ```
 
-### Логин
+### Login
 
-Создайте эндпоинт [`/users/login`](#login-request)
+Create an endpoint [`/users/login`](#login-request)
 
-В модели `User` найти пользователя по `email`.
+In the `User` model, find the user by `email`.
 
-Сделать валидацию всех обязательных полей (`email` и `password`). При ошибке валидации вернуть [Ошибку валидации](#validation-error-login).
+Validate all required fields (`email` and `password`). If validation fails, return [Validation Error](#validation-error-login).
 
-- В противном случае, сравнить пароль для найденного юзера, если пароли совпадают создать токен, сохранить в текущем юзере и вернуть [Успешный ответ](#login-success-response).
-- Если пароль или email неверный, вернуть [Ошибку Unauthorized](#login-auth-error).
+- Otherwise, compare password for found user, if passwords match create token, store in current user and return [Successful response](#login-success-response).
+
+- If password or email is incorrect, return [Error Unauthorized](#login-auth-error).
 
 #### Login request
 
@@ -126,7 +127,7 @@ RequestBody: {
 ```shell
 Status: 400 Bad Request
 Content-Type: application/json
-ResponseBody: <Ошибка от Joi или другой библиотеки  валидации>
+ResponseBody: <Error from Joi or another validation library>
 ```
 
 #### Login success response
@@ -152,17 +153,17 @@ ResponseBody: {
 }
 ```
 
-## Шаг 3
+## Step 3
 
-### Проверка токена
+### Checking the token
 
-Создайте мидлвар для проверки токена и добавь его ко всем маршрутам, которые должны быть защищены.
+Create a middleware to validate the token and add it to all routes that need to be secured.
 
-- Мидлвар берет токен из заголовков `Authorization`, проверяет токен на валидность.
-- В случае ошибки вернуть [Ошибку Unauthorized](#middleware-unauthorized-error).
-- Если валидация прошла успешно, получить из токена `id` пользователя. Найти пользователя в базе данных по этому id. 
-- Если пользователь существует и токен совпадает с тем, что находится в базе, записать его данные в `req.user` и вызвать метод`next()`. 
-- Если пользователя с таким `id` не существует или токены не совпадают, вернуть [Ошибку Unauthorized](#middleware-unauthorized-error)
+- Middleware takes the token from the `Authorization` headers, checks the token for validity.
+- Return [Unauthorized Error](#middleware-unauthorized-error) on error.
+- If the validation was successful, get the user's `id` from the token. Find a user in the database by this id.
+- If the user exists and the token matches what is in the database, write his data to `req.user` and call the `next()` method.
+- If no user with that `id` exists or tokens don't match, return [Unauthorized Error](#middleware-unauthorized-error)
 
 #### Middleware unauthorized error
 
@@ -174,17 +175,17 @@ ResponseBody: {
 }
 ```
 
-## Шаг 4
+## Step 4
 
-### Логаут
+### Logout
 
-Создайте ендпоинт [`/users/logout`](#logout-request)
+Create an endpoint [`/users/logout`](#logout-request)
 
-Добавьте в маршрут мидлвар проверки токена.
+Add token verification middleware to the route.
 
-- В модели `User` найти пользователя по `_id`.
-- Если пользователя не существует вернуть [Ошибку Unauthorized](#logout-unauthorized-error).
-- В противном случае, удалить токен в текущем юзере и вернуть [Успешный ответ](#logout-success-response).
+- In the `User` model, find the user by `_id`.
+- If the user does not exist return [Error Unauthorized](#logout-unauthorized-error).
+- Otherwise, delete the token in the current user and return [Successful response](#logout-success-response).
 
 #### Logout request
 
@@ -209,15 +210,15 @@ ResponseBody: {
 Status: 204 No Content
 ```
 
-## Шаг 5
-### Текущий пользователь - получить данные юзера по токену
+## Step 5
+### Current user - get user data by token
 
-Создайте эндпоинт [`/users/current`](#current-user-request)
+Create an endpoint [`/users/current`](#current-user-request)
 
-Добавьте в маршрут мидлвар проверки токена.
+Add token verification middleware to the route.
 
-- Если пользователя не существует вернуть [Ошибку Unauthorized](#current-user-unauthorized-error)
-- В противном случае вернуть [Успешный ответ](#current-user-success-response)
+- If user does not have return [Error Unauthorized](#current-user-unauthorized-error)
+- Otherwise, return [Successful response](#current-user-success-response)
 
 #### Current user request
 
@@ -247,8 +248,8 @@ ResponseBody: {
 }
 ```
 
-## Дополнительное задание - необязательное
+## Additional task - optional
 
-- Сделать пагинацию для коллекции контактов (GET /contacts?page=1&limit=20).
-- Сделать фильтрацию контактов по полю избранного (GET /contacts?favorite=true)
-- Обновление подписки (`subscription`) пользователя через эндпоинт `PATCH` `/users`. Подписка должна иметь одно из следующих   значений `['starter', 'pro', 'business']`
+- Make pagination for the collection of contacts (GET /contacts?page=1&limit=20).
+- Filter contacts by favorite field (GET /contacts?favorite=true)
+- Updating a user's `subscription` via the `PATCH` `/users` endpoint. The subscription must have one of the following values `['starter', 'pro', 'business']`
