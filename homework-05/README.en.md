@@ -44,7 +44,7 @@ Add the ability to update the avatar by creating an endpoint `/users/avatars` an
 ![avatar upload from postman](./avatar-upload.png)
 
 ```shell
-# Запрос
+# Request
 PATCH /users/avatars
 Content-Type: multipart/form-data
 Authorization: "Bearer {{token}}"
