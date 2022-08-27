@@ -1,49 +1,49 @@
-**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+**Read in other languages: [Russian](README.md), [Ukrainian](README.ua.md).**
 
-# Домашнее задание 6
+# Homework 6
 
-Создай ветку `hw06-email` из ветки `master`.
+Create branch `hw06-email` from branch `master`.
 
-Продолжаем создание REST API для работы с коллекцией контактов. Добавьте верификацию email пользователя после регистрации при помощи сервиса [SendGrid](https://sendgrid.com/).
+We continue to create a REST API for working with a collection of contacts. Add user email verification after registration using the [SendGrid](https://sendgrid.com/) service.
 
-## Как процесс верификации должен работать
+## How the verification process should work
 
-1. После регистрации, пользователь должен получить письмо на указанную при регистрации почту с ссылкой для верификации своего email
-2. Пройдя ссылке в полученном письме, в первый раз, пользователь должен получить [Ответ со статусом 200](#verification-success-response), что будет подразумевать успешную верификацию email
-3. Пройдя по ссылке повторно пользователь должен получить [Ошибку со статусом 404](#verification-user-not-found)
+1. After registration, the user should receive a letter to the mail specified during registration with a link to verify his email
+2. After clicking the link in the received email for the first time, the user should receive a [Response with status 200](#verification-success-response), which will imply successful email verification
+3. After clicking on the link again, the user should get [Error with status 404](#verification-user-not-found)
 
-## Шаг 1
+## Step 1
 
-### Подготовка интеграции с SendGrid API
+### Preparing integration with SendGrid API
 
-- Зарегистрируйся на [SendGrid](https://sendgrid.com/).
-- Создай email-отправителя. Для это в административной панели SendGrid зайдите в меню Marketing в подменю senders и в правом верхнем углу нажмите кнопку "Create New Sender". Заполните необходимые поля в предложенной форме. Сохраните. Должен получится следующий как на картинке результат, только с вашим email:
+- Register on [SendGrid](https://sendgrid.com/).
+- Create an email sender. To do this, in the SendGrid administrative panel, go to the Marketing menu in the senders submenu and click the "Create New Sender" button in the upper right corner. Fill in the required fields in the proposed form. Save. You should get the following result as in the picture, only with your email:
 
 ![sender](sender-not-verify.png)
 
-На указанный email должно прийти письмо верификации (проверьте спам если не видите письма). Кликните на ссылку в нем и завершите процесс. Результат должен изменится на:
+A verification email should be sent to the specified email address (check spam if you don't see the email). Click on the link in it and complete the process. The result should change to:
 
 ![sender](sender-verify.png)
 
-- Теперь необходимо создать API токен доступа. Выбираем меню "Email API", и подменю "Integration Guide". Здесь выбираем "Web API"
+- Now you need to create an API access token. Select the "Email API" menu, and the "Integration Guide" submenu. Here we select "Web API"
 
 ![api-key](web-api.png)
 
-Дальше необходимо выбрать технологию Node.js
+Next, you need to select the Node.js technology
 
 ![api-key](node.png)
 
-На третьем шаге даем имя нашему токену. Например systemcats, нажимаем кнопку сгенерировать и получаем результат как на скриншоте ниже. Необходимо скопировать этот токен (это важно, так как больше вы не сможете его посмотреть). После завершить процесс создания токена
+In the third step, we give a name to our token. For example systemcats, we press the generate button and we get the result as in the screenshot below. You need to copy this token (this is important because you won't be able to see it anymore). After completing the token creation process
 
 ![api-key](api-key.png)
 
-- Полученный API-токен надо добавить в `.env` файл в нашем проекте
+- The resulting API token must be added to the `.env` file in our project
 
-## Шаг 2
+## Step 2
 
-### Создание ендпоинта для верификации email'а
+### Create an endpoint for email verification
 
-- добавить в модель `User` два поля `verificationToken` и `verify`. Значение поля `verify` равное `false` будет означать, что его email еще не прошел верификацию
+- add two fields `verificationToken` and `verify` to the `User` model. A value of the `verify` field equal to `false` will mean that his email has not been verified yet
 
 ```js
 {
@@ -58,9 +58,9 @@
 }
 ```
 
-- создать эндпоинт GET [`/users/verify/:verificationToken`](#verification-request), где по параметру `verificationToken` мы будем искать пользователя в модели `User`
-- если пользователь с таким токеном не найден, необходимо вернуть [Ошибку 'Not Found'](#verification-user-not-found)
-- если пользователь найден - устанавливаем `verificationToken` в `null`, а поле `verify` ставим равным `true` в документе пользователя и возвращаем [Успешный ответ](#verification-success-response)
+- create a GET [`/users/verify/:verificationToken`](#verification-request) endpoint, where we will search for a user in the `User` model by the `verificationToken` parameter
+- if user with such token is not found, return [Error 'Not Found'](#verification-user-not-found)
+- if the user is found - set `verificationToken` to `null`, and set the `verify` field to `true` in the user document and return [Successful response](#verification-success-response)
 
 ### Verification request
 
@@ -86,28 +86,28 @@ ResponseBody: {
 }
 ```
 
-## Шаг 3
+## Step 3
 
-### Добавление отправки email пользователю с ссылкой для верификации
+### Adding an email to the user with a verification link
 
-При создания пользователя при регистрации:
+When creating a user during registration:
 
-- создать `verificationToken` для пользователя и записать его в БД (для генерации токена используйте пакет [uuid](https://www.npmjs.com/package/uuid) или [nanoid](https://www.npmjs.com/package/nanoid))
-- отправить email на почту пользователя и указать ссылку для верификации email'а (`/users/verify/:verificationToken`) в сообщении
-- Так же необходимо учитывать, что теперь логин пользователя не разрешен при не верифицированном email
+- create a `verificationToken` for the user and write it to the database (to generate a token, use the package [uuid](https://www.npmjs.com/package/uuid) or [nanoid](https://www.npmjs.com /package/nanoid))
+- send an email to the user's mail and specify a link to verify the email (`/users/verify/:verificationToken`) in the message
+- It is also necessary to take into account that now the user login is not allowed with an unverified email
 
-## Шаг 4
+## Step 4
 
-### Добавление повторной отправки email пользователю с ссылкой для верификации
+### Adding a resend email to the user with a verification link
 
-Необходимо предусмотреть, вариант, что пользователь может случайно удалить письмо. Оно может не дойти по какой-то причине к адресату. Наш сервис отправки писем во время регистрации выдал ошибку и т.д.
+It is necessary to provide for the option that the user can accidentally delete the letter. It may not reach the addressee for some reason. Our service for sending letters during registration gave an error, etc.
 
 #### @ POST /users/verify/
 
-- Получает `body` в формате `{ email }`
-- Если в `body` нет обязательного поля `email`, возвращает json с ключом `{"message": "missing required field email"}` и статусом `400`
-- Если с `body` все хорошо, выполняем повторную отправку письма с `verificationToken` на указанный email, но только если пользователь не верифицирован
-- Если пользователь уже прошел верификацию отправить json с ключом `{ message: "Verification has already been passed"}` со статусом `400 Bad Request`
+- Gets `body` in `{ email }` format
+- If there is no required field `email` in `body`, returns json with key `{"message": "missing required field email"}` and status `400`
+- If everything is fine with `body`, resend the letter with `verificationToken` to the specified email, but only if the user is not verified
+- If the user has already passed verification, send json with the key `{ message: "Verification has already been passed"}` with status `400 Bad Request`
 
 #### Resending a email request
 
@@ -124,7 +124,7 @@ RequestBody: {
 ```shell
 Status: 400 Bad Request
 Content-Type: application/json
-ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
+ResponseBody: <Error from Joi or another validation library>
 ```
 
 #### Resending a email success response
@@ -147,9 +147,9 @@ ResponseBody: {
 }
 ```
 
-> Примечание: Как альтернативу SendGrid можно использовать пакет [nodemailer](https://www.npmjs.com/package/nodemailer)
+> Note: As an alternative to SendGrid, you can use the [nodemailer] package(https://www.npmjs.com/package/nodemailer)
 
-## Дополнительное задание - необязательное
+## Additional task - optional
 
-### 1. Напишите dockerfile для вашего приложения
+### 1. Write a dockerfile for your application
 
