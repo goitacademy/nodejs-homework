@@ -1,87 +1,87 @@
-**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+**Read in other languages: [Russian](README.md), [Ukrainian](README.ua.md).**
 
-# Домашнее задание 2
+# Homework 2
 
-Создай форк [репозитория](https://github.com/goitacademy/nodejs-homework-template) в свой github аккаунт.
+Fork [repository](https://github.com/goitacademy/nodejs-homework-template) to your github account.
 
-Посмотри поясняющее видео как это сделать и сдавать ДЗ правильно: [<img src="./js.png" width="640">](https://www.youtube.com/watch?v=wabSW_sz_cM 'Пояснение')
+Watch an explanation video on how to do this and submit your homework correctly: [<img src="./js.png" width="640">](https://www.youtube.com/watch?v=wabSW_sz_cM 'Explanation' )
 
-Написать REST API для работы с коллекцией контактов. Для работы с REST API используй [Postman](https://www.getpostman.com/).
+Write a REST API to work with a collection of contacts. To work with the REST API, use [Postman](https://www.getpostman.com/).
 
-Прочитай внимательно readme в клонированном бойлерплейте, там описан механизм сдачи домашних заданий. Приступай к выполнению ДЗ
+Read carefully the readme in the cloned boilerplay, it describes the mechanism for submitting homework. Start doing homework
 
-## Шаг 1
+## Step 1
 
-Создай ветку `hw02-express` из ветки master.
+Create branch `hw02-express` from master branch.
 
-Установи модули командой:
+Install the modules with the command:
 
 ```bash
 npm i
 ```
 
-Следующие модули уже есть в проекте:
+The following modules are already in the project:
 
 - [express](https://www.npmjs.com/package/express)
 - [morgan](https://www.npmjs.com/package/morgan)
 - [cors](https://www.npmjs.com/package/cors)
 
-## Шаг 2
+## Step 2
 
-В app.js – веб сервер на express, добавлены прослойки `morgan` и `cors`. Начни настраивать раутинг для работы с коллекцией контактов.
+App.js is a web server on express, `morgan` and `cors` layers are added. Start setting up routing to work with your contacts collection.
 
-REST API должен поддерживать следующие рауты.
+The REST API must support the following routes.
 
 ### @ GET /api/contacts
 
-- ничего не получает
-- вызывает функцию `listContacts` для работы с json-файлом `contacts.json`
-- возвращает массив всех контактов в json-формате со статусом `200`
+- gets nothing
+- calls the `listContacts` function to work with the json file `contacts.json`
+- returns an array of all contacts in json format with status `200`
 
 ### @ GET /api/contacts/:id
 
-- Не получает `body`
-- Получает параметр `id`
-- вызывает функцию getById для работы с json-файлом contacts.json
-- если такой id есть, возвращает объект контакта в json-формате со статусом `200`
-- если такого id нет, возвращает json с ключом `"message": "Not found"` и статусом `404`
+- Doesn't get `body`
+- Gets the `id` parameter
+- calls the getById function to work with the contacts.json json file
+- if there is such an id, returns the contact object in json format with status `200`
+- if there is no such id, returns json with `"message": "Not found"` key and `404` status
 
 ### @ POST /api/contacts
 
-- Получает `body` в формате `{name, email, phone}` (все поля обязательны)
-- Если в body нет каких-то обязательных полей, возвращает json с ключом `{"message": "missing required name field"}` и статусом `400`
-- Если с `body` все хорошо, добавляет уникальный идентификатор в объект контакта
-- Вызывает функцию `addContact(body)` для сохранения контакта в файле `contacts.json`
-- По результату работы функции возвращает объект с добавленным `id` `{id, name, email, phone}` и статусом `201`
+- Gets `body` in `{name, email, phone}` format (all fields are required)
+- If there are no required fields in body, returns json with key `{"message": "missing required name field"}` and status `400`
+- If everything is fine with `body`, add a unique identifier to the contact object
+- Calls the `addContact(body)` function to save the contact in the `contacts.json` file
+- Based on the result of the function, it returns an object with the added `id` `{id, name, email, phone}` and status `201`
 
 ### @ DELETE /api/contacts/:id
 
-- Не получает `body`
-- Получает параметр `id`
-- вызывает функцию `removeContact` для работы с json-файлом `contacts.json`
-- если такой `id` есть, возвращает json формата `{"message": "contact deleted"}` и статусом `200`
-- если такого `id` нет, возвращает json с ключом `"message": "Not found"` и статусом `404`
+- Doesn't get `body`
+- Gets the `id` parameter
+- calls the `removeContact` function to work with the json file `contacts.json`
+- if there is such an `id`, it returns json of the format `{"message": "contact deleted"}` with status `200`
+- if there is no such `id`, returns json with the key `"message": "Not found"` and status `404`
 
 ### @ PUT /api/contacts/:id
 
-- Получает параметр `id`
-- Получает `body` в json-формате c обновлением любых полей `name, email и phone`
-- Если `body` нет, возвращает json с ключом `{"message": "missing fields"}` и статусом `400`
-- Если с `body` все хорошо, вызывает функцию `updateContact(contactId, body)` (напиши ее) для обновления контакта в файле `contacts.json`
-- По результату работы функции возвращает обновленный объект контакта и статусом `200`. В противном случае, возвращает json с ключом `"message": "Not found"` и статусом `404`
+- Gets the `id` parameter
+- Gets `body` in json format, updating any `name, email and phone` fields
+- If there is no `body`, returns json with key `{"message": "missing fields"}` and status `400`
+- If everything is fine with `body`, call the `updateContact(contactId, body)` function (write it) to update the contact in the `contacts.json` file
+- Based on the result of the function, it returns an updated contact object with a status of `200`. Otherwise, returns json with `"message": "Not found"` key and `404` status
 
-## Шаг 3
+## Step 3
 
-Для маршрутов, что принимают данные (`POST` и `PUT`), продумайте проверку (валидацию) принимаемых данных. Для валидации принимаемых данных используйте пакет [joi](https://github.com/sideway/joi)
+For routes that accept data (`POST` and `PUT`), consider validating the received data. To validate received data, use the [joi] package (https://github.com/sideway/joi)
 
-## Критерии приема дз #2-6
+## Homework #2-6 Submission Criteria
 
-- Создан репозиторий с домашним заданием &mdash; REST API приложение
-- При создании репозитория использован [бойлерплейт](https://github.com/goitacademy/nodejs-homework-template)
-- Пулл-реквест (PR) с соответствующим дз отправлен ментору в [schoology](https://app.schoology.com/login) на проверку (ссылка на PR)
-- Код соответствует техническому заданию проекта
-- При выполнении кода не возникает необработанных ошибок
-- Название переменных, свойств и методов начинается со строчной буквы и записываются в нотации CamelCase. Используются английские существительные
-- Название функции или метода содержит глагол
-- В коде нет закомментированных участков кода
-- Проект корректно работает в актуальной LTS-версии Node
+- Created a repository with homework &mdash; REST API Application
+- When creating the repository, [boilerplate] was used (https://github.com/goitacademy/nodejs-homework-template)
+- A pull request (PR) with the corresponding homework was sent to the mentor at [schoology](https://app.schoology.com/login) for review (link to PR)
+- The code corresponds to the terms of reference of the project
+- No unhandled errors when executing code
+- The names of variables, properties and methods start with a lowercase letter and are written in CamelCase notation. English nouns are used
+- The name of the function or method contains a verb
+- There are no commented sections of code in the code
+- The project works correctly in the current LTS version of Node
