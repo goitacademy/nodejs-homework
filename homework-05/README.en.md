@@ -1,24 +1,24 @@
-**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+**Read in other languages: [Russian](README.md), [Ukrainian](README.ua.md).**
 
-# Домашнее задание 5
+# Homework 5
 
-Создай ветку `hw05-avatars` из ветки `master`.
+Create the `hw05-avatars` branch from the `master` branch.
 
-Продолжи создание REST API для работы с коллекцией контактов. Добавь возможность загрузки аватарки пользователя через [Multer](https://github.com/expressjs/multer).
+Continue building a REST API to work with the contact collection. Add the ability to upload the user's avatar via [Multer](https://github.com/expressjs/multer).
 
-## Шаг 1
+## Step 1
 
-Создай папку `public` для раздачи статики. В этой папке сделай папку `avatars`. Настрой Express на раздачу статических файлов из папки `public`.
+Create a folder `public` for distribution of statics. In this folder make a folder `avatars`. Set up Express to serve static files from the `public` folder.
 
-Положи любое изображение в папку `public/avatars` и проверь что раздача статики работает. При переходе по такому URL браузер отобразит изображение.
+Put any image in the `public/avatars` folder and check that the static distribution works. When you navigate to such a URL, the browser will display the image.
 
 ```shell
-http://localhost:<порт>/avatars/<имя файла с расширением>
+http://localhost:<порт>/avatars/<filename with extension>
 ```
 
-## Шаг 2
+## Step 2
 
-В схему пользователя добавь новое свойство `avatarURL` для хранения изображения.
+Add a new `avatarURL` property to the user schema to hold the image.
 
 ```shell
 {
@@ -28,18 +28,18 @@ http://localhost:<порт>/avatars/<имя файла с расширением
 }
 ```
 
-- Используй пакет [gravatar](https://www.npmjs.com/package/gravatar) для того чтобы при регистрации нового пользователя сразу сгенерить ему аватар по его `email`.
+- Use the package [gravatar](https://www.npmjs.com/package/gravatar) to immediately generate an avatar for him by his `email` when registering a new user.
 
-## Шаг 3
+## Step 3
 
-При регистрации пользователя:
+When registering a user:
 
-- Создавай ссылку на аватарку пользователя с помощью [gravatar](https://www.npmjs.com/package/gravatar)
-- Полученный URL сохрани в поле `avatarURL` во время создания пользователя
+- Create a link to the user's avatar with [gravatar](https://www.npmjs.com/package/gravatar)
+- Save the resulting URL in the `avatarURL` field during user creation
 
-## Шаг 4
+## Step 4
 
-Добавь возможность обновления аватарки, создав эндпоинт `/users/avatars` и используя метод `PATCH`.
+Add the ability to update the avatar by creating an endpoint `/users/avatars` and using the `PATCH` method.
 
 ![avatar upload from postman](./avatar-upload.png)
 
@@ -48,16 +48,16 @@ http://localhost:<порт>/avatars/<имя файла с расширением
 PATCH /users/avatars
 Content-Type: multipart/form-data
 Authorization: "Bearer {{token}}"
-RequestBody: загруженный файл
+RequestBody: uploaded file
 
-# Успешный ответ
+# Successful response
 Status: 200 OK
 Content-Type: application/json
 ResponseBody: {
-  "avatarURL": "тут будет ссылка на изображение"
+  "avatarURL": "image link goes here"
 }
 
-# Неуспешный ответ
+# Unsuccessful response
 Status: 401 Unauthorized
 Content-Type: application/json
 ResponseBody: {
@@ -65,10 +65,10 @@ ResponseBody: {
 }
 ```
 
-- Создай папку tmp в корне проекта и сохраняй в неё загруженную аватарку.
-- Обработай аватарку пакетом [jimp](https://www.npmjs.com/package/jimp) и задай для нее размеры 250 на 250
-- Перенеси аватарку пользователя из папки tmp в папку `public/avatars` и дай ей уникальное имя для конкретного пользователя.
-- Полученный `URL` `/avatars/<имя файла с расширением>` сохрани в поле `avatarURL` пользователя
+- Create a folder tmp in the root of the project and save the uploaded avatar to it.
+- Process the avatar with the [jimp] package (https://www.npmjs.com/package/jimp) and set its dimensions to 250 by 250
+- Move the user's avatar from the tmp folder to the `public/avatars` folder and give it a unique name for the specific user.
+- The resulting `URL` `/avatars/<file name with extension>` save in the user's `avatarURL` field
 
 ## Дополнительное задание - необязательное
 
@@ -76,7 +76,14 @@ ResponseBody: {
 
 При помощи [Jest](https://jestjs.io/ru/docs/getting-started)
 
-- ответ должен иметь статус-код 200
-- в ответе должен возвращаться токен
-- в ответе должен возвращаться объект `user` с 2 полями `email` и `subscription`, имеющие тип данных `String`
+## Additional task - optional
+
+### 1. Write unit tests for the login controller (login/signin)
+
+Using [Jest](https://jestjs.io/ru/docs/getting-started)
+
+- response must have status code 200
+- the token must be returned in the response
+- the response should return a `user` object with 2 fields `email` and `subscription`, having the data type `String`
+
 
