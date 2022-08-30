@@ -1,60 +1,60 @@
-**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+**Leer en otros idiomas: [Русский](README.md), [Українська](README.ua.md).**
 
-# Домашнее задание 1
+# Tarea 1
 
-## Шаг 1
+## Paso 1
 
-- Инициализируй npm в проекте
-- В корне проекта создай файл `index.js`
-- Поставь пакет [nodemon](https://www.npmjs.com/package/nodemon) как зависимость разработки (devDependencies)
-- В файле `package.json` добавь "скрипты" для запуска `index.js`
-- Скрипт `start` который запускает `index.js` с помощью `node`
-- Скрипт `start:dev` который запускает `index.js` с помощью `nodemon`
+- Inicia npm en el proyecto
+- En la raíz del proyecto, cree un archivo `index.js`
+- Pon el paquete [nodemon](https://www.npmjs.com/package/nodemon) como dependencia de desarrollo (devDependencies)
+- En el archivo `package.json` añade "scripts" para iniciar `index.js`
+- El script `start` que lanza `index.js` mediante `node`
+- El script `start:dev` que lanza `index.js` mediante `nodemon`
 
-## Шаг 2
+## Paso 2
 
-В корне проекта создай папку `db`. Для хранения контактов скачай и используй файл [contacts.json](./contacts.json), положив его в папку `db`.
+En la raíz del proyecto cree una carpeta `db`. Descargue y utilice el archivo [contacts.json](./contacts.json) para almacenar los contactos, y colóquelo en la carpeta `db`.
 
-В корне проекта создай файл `contacts.js`.
+Cree un archivo `contacts.js` en la raíz del proyecto.
 
-- Сделай импорт модулей `fs` и `path` для работы с файловой системой
-- Создай переменную `contactsPath` и запиши в нее путь к файле `contacts.json`. Для составления пути используй методы модуля `path`.
-- Добавь функции для работы с коллекцией контактов. В функциях используй модуль `fs` и его методы `readFile()` и `writeFile()`
-- Сделай экспорт созданных функций через `module.exports`
+- Importa los módulos `fs` y `path` para trabajar con el sistema de archivos.
+- Cree una variable `contactsPath` y escribe en ella la ruta al archivo `contacts.json`. Utiliza los métodos del módulo `path` para elaborar la ruta.
+- Añade funciones para trabajar con la colección de contactos. En las funciones, utiliza el módulo `fs` y sus métodos `readFile()` y `writeFile()`.
+- Exporta las funciones creadas mediante `module.exports`.
 
 ```js
 // contacts.js
 
 /*
- * Раскомментируй и запиши значение
+ * Comenta y anota el valor
  * const contactsPath = ;
  */
 
-// TODO: задокументировать каждую функцию
+// TODO: documenta cada función
 function listContacts() {
-  // ...твой код
+  // ...tu código
 }
 
 function getContactById(contactId) {
-  // ...твой код
+  // ...tu código
 }
 
 function removeContact(contactId) {
-  // ...твой код
+  // ...tu código
 }
 
 function addContact(name, email, phone) {
-  // ...твой код
+  // ...tu código
 }
 ```
 
-## Шаг 3
+## Paso 3
 
-Сделай импорт модуля `contacts.js` в файле `index.js` и проверь работоспособность функций для работы с контактами.
+Importa el módulo `contacts.js` en el archivo `index.js` y comprueba que las funciones para manipular los contactos funcionan.
 
-## Шаг 4
+## Paso 4
 
-В файле `index.js` импортируется пакет `yargs` для удобного парса аргументов командной строки. Используй готовую функцию `invokeAction()` которая получает тип выполняемого действия и необходимые аргументы. Функция вызывает соответствующий метод из файла `contacts.js` передавая ему необходимые аргументы.
+En el archivo `index.js` se importa el paquete `yargs` para facilitar el análisis de los argumentos de la línea de comandos. Utilice la función ya preparada `invokeAction()` que obtiene el tipo de acción a realizar y los argumentos necesarios. La función llama al método apropiado del archivo `contacts.js` pasándole los argumentos necesarios.
 
 ```js
 // index.js
@@ -87,7 +87,7 @@ function invokeAction({ action, id, name, email, phone }) {
 invokeAction(argv);
 ```
 
-Так же, вы можете использовать модуль [commander](https://www.npmjs.com/package/commander) для парсинга аргументов командной строки. Это более популярная альтернатива модуля `yargs`
+También puede utilizar el módulo [commander](https://www.npmjs.com/package/commander) para hacer parsing a los argumentos de la línea de comandos. Esta es una alternativa más popular al módulo `yargs'.
 
 ```js
 const { Command } = require('commander');
@@ -130,35 +130,35 @@ function invokeAction({ action, id, name, email, phone }) {
 invokeAction(argv);
 ```
 
-## Шаг 5
+## Paso 5
 
-Запусти команды в терминале и сделай отдельный скриншот результата выполнения каждой команды.
+Ejecuta los comandos en el terminal y haz una captura de pantalla del resultado de cada comando.
 
 ```shell
-# Получаем и выводим весь список контактов в виде таблицы (console.table)
+# Obtenemos y mostramos la lista completa de contactos en forma de tabla (console.table).
 node index.js --action list
 
-# Получаем контакт по id
+# Obtenemos un contacto según su id
 node index.js --action get --id 5
 
-# Добавялем контакт
+# Añadimos un contacto
 node index.js --action add --name Mango --email mango@gmail.com --phone 322-22-22
 
-# Удаляем контакт
+# Eliminamos un contacto
 node index.js --action remove --id 3
 ```
 
-## Шаг 6 - Сдача домашнего задания.
+## Paso 6 - Entrega de la tarea.
 
-Скриншоты выполнения команд, можно залить на любой бесплатный облачный сервис хранения картинок (Пример: [monosnap](https://monosnap.com/), [imgbb.com](https://imgbb.com/)) и соответствующие ссылки необходимо добавить в файл README.md. Создайте этот файл в корне проекта. После прикрепите ссылку на репозиторий с домашним заданием в [schoology](https://app.schoology.com/login) для проверки ментором.
+Las capturas de pantalla de la ejecución de los comandos, se pueden subir a cualquier servicio gratuito de almacenamiento de imágenes en la nube (Ejemplo: [monosnap](https://monosnap.com/), [imgbb.com](https://imgbb.com/)) y los enlaces pertinentes deben añadirse al archivo README.md. Cree este archivo en la raíz del proyecto. Después, adjunte un enlace al repositorio con la tarea a [schoology](https://app.schoology.com/login) para que el mentor la revise.
 
-## Критерии приема
+## Requisitos para que sea admitida
 
-- Создан репозиторий с домашним заданием &mdash; CLI приложение
-- Задание отправлено ментору в [schoology](https://app.schoology.com/login) на проверку (ссылка на репозиторий)
-- Код соответствует техническому заданию проекта
-- При выполнении кода не возникает необработанных ошибок
-- Название переменных, свойств и методов начинается со строчной буквы и записываются в нотации CamelCase. Используются английские существительные
-- Название функции или метода содержит глагол
-- В коде нет закомментированных участков кода
-- Проект корректно работает в актуальной LTS-версии Node
+- Repositorio creado con la tarea &mdash; aplicación CLI
+- Tarea enviada al mentor en [schoology](https://app.schoology.com/login) para su revisión (enlace al repositorio)
+- El código se ajusta a la tarea técnica del proyecto
+- No se producen errores sin procesar durante la ejecución del código
+- Los nombres de variables, propiedades y métodos comienzan con una letra minúscula y se escriben en notación CamelCase. Se utilizan sustantivos en inglés
+- El nombre de las funciones o métodos contiene un verbo
+- No hay secciones de código comentadas en el código
+- El proyecto funciona correctamente en la versión LTS actual de Node
