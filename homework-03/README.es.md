@@ -1,40 +1,40 @@
-**Читать на других языках: [Русский](README.md), [Українська](README.ua.md).**
+**Leer en otros idiomas: [Русский](README.md), [Українська](README.ua.md).**
 
-# Домашнее задание 3
+# Tarea 3
 
-Создай ветку `hw03-mongodb` из ветки `master`.
+Crea una rama `hw03-mongodb` de la rama `master`.
 
-Продолжи создание REST API для работы с коллекцией контактов.
+Continúa con la creación de la API REST para trabajar con una colección de contactos.
 
-## Шаг 1
+## Paso 1
 
-Создай аккаунт на [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). После чего в аккаунте создай новый проект и настрой **бесплатный кластер**. Во время настройки кластера выбери провайдера и регион как на скриншоте ниже. Если выбрать слишком удаленный регион, скорость ответа сервера будет дольше.
+Crea una cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). A continuación, cree un nuevo proyecto en su cuenta y configure un **clúster gratuito**. Cuando configure el clúster, seleccione su ISP y su región como se muestra en la captura de pantalla siguiente. Si elige una región demasiado alejada, la velocidad de respuesta del servidor será más lenta.
 
 ![atlas cluster setup](./atlas-cluster.jpg)
 
-## Шаг 2
+## Paso 2
 
-Установи графический редактор [MongoDB Compass](https://www.mongodb.com/download-center/compass) для удобной работы с базой данных для MongoDB. Настрой подключение своей облачной базы данных к Compass. В MongoDB Atlas не забудь создать пользователя с правами администратора.
+Instala el redactor gráfico [MongoDB Compass](https://www.mongodb.com/download-center/compass) para un funcionamiento sencillo de la base de datos para MongoDB. Configure la conexión de su base de datos en la nube con Compass. En MongoDB Atlas, recuerda crear un usuario con privilegios de administrador.
 
-## Шаг 3
+## Paso 3
 
-Через Compass создай базу данных `db-contacts` и в ней коллекцию `contacts`. Возьми [ссылка на json](./contacts.json) и при помощи Compass наполни коллекцию `contacts` (сделай импорт) его содержимым.
+Utilice Compass para crear una base de datos `db-contacts` y cree una colección `contacts` en ella. Usando el [link a json](./contacts.json) y utilizando Compass, llena la colección `contacts` (importándolo) con su contenido.
 
 ![data](./json-data.png)
 
-Если вы все сделали правильно, данные должны появиться в вашей базе в коллекции `contacts`
+Si lo has hecho correctamente, los datos deberían aparecer en tu base de datos en la colección `contacts`.
 
 ![data](./mongo-data.png)
-## Шаг 4
+## Paso 4
 
-Используйте исходный код [домашней работы #2](../homework-02/README.md) и замените хранение контактов из json-файла на созданную вами базу данных.
+Utiliza el código fuente [tarea #2](../homework-02/README.md) y sustituye el almacenamiento de contactos del archivo json, por la base de datos que has creado.
 
-- Напишите код для создания подключения к MongoDB при помощи [Mongoose](https://mongoosejs.com/).
-- При успешном подключении выведите в консоль сообщение `"Database connection successful"`.
-- Обязательно обработайте ошибку подключения. Выведите в консоль сообщение ошибки и завершите процесс используя `process.exit(1)`.
-- В функциях обработки запросов замените код CRUD-операций над контактами из файла, на Mongoose-методы для работы с коллекцией контактов в базе данных.
+- Escribe el código para crear una conexión a MongoDB usando [Mongoose](https://mongoosejs.com/).
+- Si la conexión tiene éxito, muestra en la consola el mensaje `"Database connection successful"`.
+- Asegúrese de atender el error de conexión. Muestra un mensaje de error en la consola y termina el proceso usando `process.exit(1)`.
+- En las funciones de consulta, sustituya el código de las operaciones CRUD sobre contactos del archivo, por métodos de Mongoose para trabajar con una colección de contactos en la base de datos.
 
-Схема модели для коллекции `contacts`:
+Esquema del modelo de la colección `contacts`:
 
 ```js
   {
@@ -55,17 +55,17 @@
   }
 ```
 
-## Шаг 5
+## Paso 5
 
-У нас появилось в контактах дополнительное поле статуса `favorite`, которое принимает логическое значение `true` или `false`. Оно отвечает за то, что в избранном или нет находится указанный контакт. Реализуй для обновления статуса контакта новый маршрут
+Tenemos un campo de estado adicional `favorite` en los contactos, que toma un valor booleano de `true` o `false`. Es responsable de que el contacto especificado esté o no en favoritos. Implementa una nueva ruta para actualizar el estado del contacto
 
 ### @ PATCH /api/contacts/:id/favorite
 
-- Получает параметр `contactId`
-- Получает `body` в json-формате c обновлением поля `favorite`
-- Если `body` нет, возвращает json с ключом `{"message": "missing field favorite"}` и статусом `400`
-- Если с `body` все хорошо, вызывает функцию `updateStatusContact(contactId, body)` (напиши ее) для обновления контакта в базе
-- По результату работы функции возвращает обновленный объект контакта и статусом `200`. В противном случае, возвращает json с ключом `"message": "Not found"` и статусом `404`
+- Recibe el parámetro `contactId`
+- Recibe `body` en formato json con el campo `favorito` actualizado
+- Si no se encuentra `body`, devuelve un json con la llave `{"message": "missing field favorite"}` y el estado `400`.
+- Si `body` está bien, llama a la función `updateStatusContact(contactId, body)` (escríbela) para actualizar el contacto en la base de datos
+- La función devuelve un objeto de contacto actualizado con el estado `200`. En caso contrario, devuelve el json con la llave `"message": "Not found"` y el estado `404`.
 
 
-Для роута `POST /api/contacts` внесите изменения: если поле `favorite` не указали в `body`, то при сохранении в базу нового контакта, сделайте поле `favorite` равным по умолчанию `false`. Не забываем про валидацию данных!
+Para el route `POST /api/contacts`, haz un cambio: si el campo `favorite` no se especifica en `body`, haz que el campo `favorite` sea por defecto `false` al guardar un nuevo contacto en la base de datos. No te olvides de la validación de los datos.
