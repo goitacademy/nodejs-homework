@@ -124,7 +124,7 @@ RequestBody: {
 ```shell
 Status: 400 Bad Request
 Content-Type: application/json
-ResponseBody: <Ошибка от Joi или другой библиотеки валидации>
+ResponseBody: <Error de Joi u otra biblioteca de validación>
 ```
 
 #### Resending a email success response
