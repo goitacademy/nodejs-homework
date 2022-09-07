@@ -60,7 +60,7 @@ En el archivo `index.js` se importa el paquete `yargs` para facilitar el anális
 // index.js
 const argv = require('yargs').argv;
 
-// TODO: рефакторить
+// TODO: refactorizar
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
@@ -103,7 +103,7 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторить
+// TODO: refactorizar
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
