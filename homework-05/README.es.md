@@ -13,7 +13,7 @@ Crea una carpeta `public` para la distribución de los archivos estáticos. Crea
 Coloca cualquier imagen en la carpeta `public/avatars` y asegúrate de que la distribución de archivos estáticos funciona. Al ir a esta URL, el navegador mostrará la imagen.
 
 ```shell
-http://localhost:<порт>/avatars/<nombre de archivo con extensión>
+http://localhost:<puerto>/avatars/<nombre de archivo con extensión>
 ```
 
 ## Paso 2
