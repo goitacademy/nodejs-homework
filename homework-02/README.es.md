@@ -50,7 +50,7 @@ La API REST debe soportar los siguientes routes.
 
 - Recibe `body` en formato `{name, email, phone}` (todos los campos son obligatorios)
 - Si el cuerpo no tiene alguno de los campos obligatorios, devuelve un json con la llave `{"message": "missing required name field"}` y el estado `400`
-- Если с `body` все хорошо, добавляет уникальный идентификатор в объект контакта
+- Si `body` está bien, añade un identificador único al objeto de contacto
 - Llama a la función `addContact(body)` para guardar los contactos en formato `contacts.json`
 - El resultado de la función devuelve el objeto con `id` `{id, name, email, phone}` añadido y el estado `201`
 
