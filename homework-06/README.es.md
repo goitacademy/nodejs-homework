@@ -60,7 +60,7 @@ En el tercer paso, le damos un nombre a nuestro token. Por ejemplo, systemcats, 
 
 - crea el endpoint GET [`/users/verify/:verificationToken`](#verification-request), donde para buscar un usuario en el modelo `User` se utilizaremos el parámetro `verificationToken`
 - si no se encuentra un usuario con este token, debe devolver [Error 'Not Found'](#verification-user-not-found)
-- si el usuario es encontrado, se establece `verificationToken` a `null` y se establece el campo `verify` a `true` en el documento del usuario, y se devuelve [Успешный ответ](#verification-success-response)
+- si el usuario es encontrado, se establece `verificationToken` a `null` y se establece el campo `verify` a `true` en el documento del usuario, y se devuelve [Respuesta exitosa](#verification-success-response)
 
 ### Verification request
 
