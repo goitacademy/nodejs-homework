@@ -57,15 +57,15 @@ Model schema for the `contacts` collection:
 
 ## Step 5
 
-We have an additional status field `favorite` in contacts, which takes the boolean value `true` or `false`. It is responsible for the fact that the specified contact is in the favorites or not. Implement a new route to update contact status
+We have an additional status field `favorite` in contacts, which takes the boolean value `true` or `false`. It is responsible for the fact that the specified contact is in the favorites or not. Implement a new route to update contact status.
 
 ### @ PATCH /api/contacts/:id/favorite
 
 - Gets the `contactId` parameter
-- Gets `body` in json format with update of `favorite` field
-- If there is no `body`, returns json with key `{"message": "missing field favorite"}` and status `400`
+- Gets `body` in JSON format with the update of the `favorite` field
+- If there is no `body`, returns JSON with key `{"message": "missing field favorite"}` and status `400`
 - If everything is fine with `body`, call the `updateStatusContact(contactId, body)` function (write it) to update the contact in the database
-- Based on the result of the function, it returns an updated contact object with a status of `200`. Otherwise, returns json with `"message": "Not found"` key and `404` status
+- Based on the result of the function, it returns an updated contact object with a status of `200`. Otherwise, returns JSON with `"message": "Not found"` key and `404` status
 
 
-For the `POST /api/contacts` route, make changes: if the `favorite` field is not specified in `body`, then when saving a new contact to the database, make the `favorite` field equal to the default `false`. Don't forget about data validation!
+For the `POST /api/contacts` route, make changes: If the `favorite` field is not specified in `body`, then when saving a new contact to the database, make the `favorite` field equal to the default `false`. Don't forget about data validation!
