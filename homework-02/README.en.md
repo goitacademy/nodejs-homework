@@ -8,7 +8,7 @@ Watch an explanation video on how to do this and submit your homework correctly:
 
 Write a REST API to work with a collection of contacts. To work with the REST API, use [Postman](https://www.getpostman.com/).
 
-Read carefully the readme in the cloned boilerplay, it describes the mechanism for submitting homework. Start doing homework
+Read carefully the readme in the cloned boilerplay, it describes the mechanism for submitting homework. Start doing homework.
 
 ## Step 1
 
@@ -22,9 +22,9 @@ npm i
 
 The following modules are already in the project:
 
-- [express](https://www.npmjs.com/package/express)
-- [morgan](https://www.npmjs.com/package/morgan)
-- [cors](https://www.npmjs.com/package/cors)
+- [Express](https://www.npmjs.com/package/express)
+- [Morgan](https://www.npmjs.com/package/morgan)
+- [CORS](https://www.npmjs.com/package/cors)
 
 ## Step 2
 
@@ -34,22 +34,22 @@ The REST API must support the following routes.
 
 ### @ GET /api/contacts
 
-- gets nothing
-- calls the `listContacts` function to work with the json file `contacts.json`
-- returns an array of all contacts in json format with status `200`
+- Gets nothing
+- Calls the `listContacts` function to work with the JSON file `contacts.json`
+- Returns an array of all contacts in json format with status `200`
 
 ### @ GET /api/contacts/:id
 
 - Doesn't get `body`
 - Gets the `id` parameter
-- calls the getById function to work with the contacts.json json file
-- if there is such an id, returns the contact object in json format with status `200`
-- if there is no such id, returns json with `"message": "Not found"` key and `404` status
+- Calls the getById function to work with the contacts.json JSON file
+- If there is such an id, returns the contact object in JSON format with status `200`
+- If there is no such id, returns json with `"message": "Not found"` key and `404` status
 
 ### @ POST /api/contacts
 
 - Gets `body` in `{name, email, phone}` format (all fields are required)
-- If there are no required fields in body, returns json with key `{"message": "missing required name field"}` and status `400`
+- If there are no required fields in body, returns JSON with key `{"message": "missing required name field"}` and status `400`
 - If everything is fine with `body`, add a unique identifier to the contact object
 - Calls the `addContact(body)` function to save the contact in the `contacts.json` file
 - Based on the result of the function, it returns an object with the added `id` `{id, name, email, phone}` and status `201`
@@ -58,27 +58,27 @@ The REST API must support the following routes.
 
 - Doesn't get `body`
 - Gets the `id` parameter
-- calls the `removeContact` function to work with the json file `contacts.json`
-- if there is such an `id`, it returns json of the format `{"message": "contact deleted"}` with status `200`
-- if there is no such `id`, returns json with the key `"message": "Not found"` and status `404`
+- Calls the `removeContact` function to work with the JSON file `contacts.json`
+- If there is such an `id`, it returns JSON of the format `{"message": "contact deleted"}` with status `200`
+- If there is no such `id`, returns JSON with the key `"message": "Not found"` and status `404`
 
 ### @ PUT /api/contacts/:id
 
 - Gets the `id` parameter
-- Gets `body` in json format, updating any `name, email and phone` fields
+- Gets `body` in JSON format, updating any `name, email and phone` fields
 - If there is no `body`, returns json with key `{"message": "missing fields"}` and status `400`
 - If everything is fine with `body`, call the `updateContact(contactId, body)` function (write it) to update the contact in the `contacts.json` file
 - Based on the result of the function, it returns an updated contact object with a status of `200`. Otherwise, returns json with `"message": "Not found"` key and `404` status
 
 ## Step 3
 
-For routes that accept data (`POST` and `PUT`), consider validating the received data. To validate received data, use the [joi] package (https://github.com/sideway/joi)
+For routes that accept data (`POST` and `PUT`), consider validating the received data. To validate received data, use the [joi] package (https://github.com/sideway/joi).
 
 ## Homework #2-6 Submission Criteria
 
-- Created a repository with homework &mdash; REST API Application
+- Created a repository with homework &mdash; REST API application
 - When creating the repository, [boilerplate] was used (https://github.com/goitacademy/nodejs-homework-template)
-- A pull request (PR) with the corresponding homework was sent to the mentor at [schoology](https://app.schoology.com/login) for review (link to PR)
+- A pull request (PR) with the corresponding homework was sent to the mentor at [Schoology](https://app.schoology.com/login) for review (link to PR)
 - The code corresponds to the terms of reference of the project
 - No unhandled errors when executing code
 - The names of variables, properties and methods start with a lowercase letter and are written in CamelCase notation. English nouns are used
