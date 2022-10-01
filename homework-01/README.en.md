@@ -18,7 +18,7 @@ Create a folder `db` in the root of the project. To store contacts, download and
 At the root of the project, create a `contacts.js` file.
 
 - Make imports of modules `fs` and `path` to work with the file system
-- Create a `contactsPath` variable and put the path to the `contacts.json` file in it. To compose a path, use the methods of the `path` module.
+- Create a `contactsPath` variable and put the path to the `contacts.json` file in it. To compose a path, use the methods of the `path` module
 - Add functions to work with a collection of contacts. In functions, use the `fs` module and its `readFile()` and `writeFile()` methods
 - Make export of created functions via `module.exports`
 
@@ -87,7 +87,7 @@ function invokeAction({ action, id, name, email, phone }) {
 invokeAction(argv);
 ```
 
-Alternatively, you can use the [commander](https://www.npmjs.com/package/commander) module to parse command line arguments. This is a more popular alternative to the `yargs` module
+Alternatively, you can use the [commander](https://www.npmjs.com/package/commander) module to parse command line arguments. This is a more popular alternative to the `yargs` module.
 
 ```js
 const { Command } = require('commander');
@@ -148,14 +148,14 @@ node index.js --action add --name Mango --email mango@gmail.com --phone 322-22-2
 node index.js --action remove --id 3
 ```
 
-## Step 6 - Homework submission
+## Step 6 - Homework Submission
 
-Command execution screenshots can be uploaded to any free cloud image storage service (Example: [monosnap](https://monosnap.com/), [imgbb.com](https://imgbb.com/)) and the corresponding links are necessary add to the README.md file. Create this file at the root of the project. Then attach a link to the homework repository at [schoology](https://app.schoology.com/login) for mentor to check.
+Command execution screenshots can be uploaded to any free cloud image storage service (Example: [monosnap](https://monosnap.com/), [imgbb.com](https://imgbb.com/)) and the corresponding links are necessary add to the README.md file. Create this file at the root of the project. Then attach a link to the homework repository at [Schoology](https://app.schoology.com/login) for mentor to check.
 
-## Admission criteria
+## Admission Criteria
 
 - You created a repository with homework &mdash; CLI application
-- The assignment has been sent to the mentor at [schoology](https://app.schoology.com/login) for review (repository link)
+- The assignment has been sent to the mentor at [Schoology](https://app.schoology.com/login) for review (repository link)
 - The code corresponds to the terms of reference of the project
 - No unhandled errors when executing code
 - The names of variables, properties and methods start with a lowercase letter and are written in CamelCase notation. English nouns are used
