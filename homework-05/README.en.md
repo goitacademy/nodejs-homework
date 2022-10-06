@@ -68,7 +68,7 @@ ResponseBody: {
 - Create a tmp folder in the root of the project and save the uploaded avatar to it
 - Process the avatar with the [jimp] package (https://www.npmjs.com/package/jimp) and set its dimensions to 250 by 250
 - Move the user's avatar from the tmp folder to the `public/avatars` folder and give it a unique name for the specific user
-- The resulting `URL` `/avatars/<file name with extension>` save in the user's `avatarURL` field
+- The resulting `URL` is `/avatars/<file name with extension>`, save it in the user's `avatarURL` field
 
 
 ## Additional Task - Optional
