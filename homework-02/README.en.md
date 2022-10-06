@@ -8,7 +8,7 @@ Watch an explanation video on how to do this and submit your homework correctly:
 
 Write a REST API to work with a collection of contacts. To work with the REST API, use [Postman](https://www.getpostman.com/).
 
-Read carefully the readme in the cloned boilerplay, it describes the mechanism for submitting homework. Start doing homework.
+Read carefully the readme in the cloned boilerplate, it describes the mechanism for submitting homework. Start doing homework.
 
 ## Step 1
 
