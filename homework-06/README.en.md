@@ -65,7 +65,7 @@ In the third step, we give a name to our token. For example systemcats, we press
 ### Verification Request
 
 ```shell
-GET /auth/verify/:verificationToken
+GET /users/verify/:verificationToken
 ```
 
 ### Verification User Not Found
