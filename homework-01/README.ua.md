@@ -139,13 +139,13 @@ invokeAction(argv);
 node index.js --action="list"
 
 # Отримуємо контакт по id
-node index.js --action="get" --id=5
+node index.js --action="get" --id 05olLMgyVQdWRwgKfg5J6
 
 # Додаємо контакт
-node index.js --action="add" --name="Mango" --email="mango@gmail.com" --phone="322-22-22"
+node index.js --action="add" --name Mango --email mango@gmail.com --phone 322-22-22
 
 # Видаляємо контакт
-node index.js --action="remove" --id 3
+node index.js --action="remove" --id qdggE76Jtbfd9eWJHrssH
 ```
 
 ## Крок 6 - Здача домашнього завдання.

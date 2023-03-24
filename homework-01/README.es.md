@@ -139,13 +139,13 @@ Ejecuta los comandos en el terminal y haz una captura de pantalla del resultado 
 node index.js --action list
 
 # Obtenemos un contacto según su id
-node index.js --action get --id 5
+node index.js --action get --id 05olLMgyVQdWRwgKfg5J6
 
 # Añadimos un contacto
 node index.js --action add --name Mango --email mango@gmail.com --phone 322-22-22
 
 # Eliminamos un contacto
-node index.js --action remove --id 3
+node index.js --action remove --id qdggE76Jtbfd9eWJHrssH
 ```
 
 ## Paso 6 - Entrega de la tarea.
