@@ -13,7 +13,7 @@
 
 ## Krok 2
 
-W root projektu utwórz plik `db`. Dla zapisywania kontaktów ściągnij i wykorzystaj plik [contacts.json](./contacts.json), umieszczając go w folderze `db`.
+W root projektu utwórz folder `db`. Dla zapisywania kontaktów ściągnij i wykorzystaj plik [contacts.json](./contacts.json), umieszczając go w folderze `db`.
 
 W root projektu utwórz plik `contacts.js`.
 
