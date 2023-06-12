@@ -14,7 +14,7 @@ Create an account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). Then 
 
 ## Step 2
 
-Install the graphical editor [MongoDB Compass](https://www.mongodb.com/download-center/compass) for convenient work with the database for MongoDB. Set up your cloud database connection to Compass. In MongoDB Atlas, don't forget to create an admin user.
+Install the graphical editor [MongoDB Compass](https://www.mongodb.com/products/compass) for convenient work with the database for MongoDB. Set up your cloud database connection to Compass. In MongoDB Atlas, don't forget to create an admin user.
 
 ## Step 3
 

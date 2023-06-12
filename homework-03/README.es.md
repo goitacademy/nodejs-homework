@@ -14,7 +14,7 @@ Crea una cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). A conti
 
 ## Paso 2
 
-Instala el redactor gráfico [MongoDB Compass](https://www.mongodb.com/download-center/compass) para un funcionamiento sencillo de la base de datos para MongoDB. Configure la conexión de su base de datos en la nube con Compass. En MongoDB Atlas, recuerda crear un usuario con privilegios de administrador.
+Instala el redactor gráfico [MongoDB Compass](https://www.mongodb.com/products/compass) para un funcionamiento sencillo de la base de datos para MongoDB. Configure la conexión de su base de datos en la nube con Compass. En MongoDB Atlas, recuerda crear un usuario con privilegios de administrador.
 
 ## Paso 3
 

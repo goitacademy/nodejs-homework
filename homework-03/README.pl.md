@@ -14,7 +14,7 @@ Stwórz konto na [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), a następ
 
 ## Krok 2
 
-Skonfiguruj edytor graficzny [MongoDB Compass](https://www.mongodb.com/download-center/compass) do wygodnej pracy z bazą danych dla MongoDB. Skonfiguruj podłączenie swojej chmury do Compass. W MongoDB Atlas nie zapomnij utworzyć użytkownika z prawami administratora.
+Skonfiguruj edytor graficzny [MongoDB Compass](https://www.mongodb.com/products/compass) do wygodnej pracy z bazą danych dla MongoDB. Skonfiguruj podłączenie swojej chmury do Compass. W MongoDB Atlas nie zapomnij utworzyć użytkownika z prawami administratora.
 
 ## Krok 3
 
