@@ -1,5 +1,2 @@
-const isValidId = require("./isValidId");
-
-module.exports = {
-  isValidId,
-};
+const isValidId = require('./isValidId');
+module.exports = isValidId;
