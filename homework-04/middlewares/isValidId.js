@@ -1,15 +1,16 @@
 const { isValidObjectId } = require('mongoose');
 
-const { HttpError } = require('../helpers');
+const { HttpError } = require('../helpers'); 
 
 const isValidId = (req, res, next) => {
-  const { id } = req.params;
-  
+  const { id } = req.params; 
+
   if (!isValidObjectId(id)) {
-    next(HttpError(400, `${id} is not valid id`));
+    // Перевірка, чи є id дійсним ObjectId
+    next(HttpError(400, `${id} is not valid id`)); // Якщо id не є дійсним ObjectId, створюється об'єкт HttpError з кодом помилки 400 і повідомленням про помилку
   }
 
-  next();
+  next(); // Якщо id є дійсним ObjectId, переходимо до наступного middleware
 };
 
-module.exports = isValidId;
+module.exports = isValidId; 

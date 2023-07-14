@@ -1,21 +1,21 @@
 const { Contact, addSchema } = require('../../models/contact');
-const { HttpError } = require('../../helpers');
+const { HttpError } = require('../../helpers'); 
 
 const updateById = async (req, res) => {
-  const { error } = addSchema.validate(req.body);
+  const { error } = addSchema.validate(req.body); // Валідація запиту за допомогою схеми addSchema
 
   if (error) {
-    throw HttpError(400, 'missing fields');
+    throw HttpError(400, 'missing fields'); // Якщо виникає помилка валідації, створюється об'єкт HttpError з кодом помилки 400 і повідомленням про помилку
   }
 
-  const { id } = req.params;
-  const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });
+  const { id } = req.params; // Отримання значення параметра id з запиту
+  const result = await Contact.findByIdAndUpdate(id, req.body, { new: true }); // Оновлення контакту за допомогою методу findByIdAndUpdate
 
   if (!result) {
-    throw HttpError(404, 'Not found');
+    throw HttpError(404, 'Not found'); // Якщо результат оновлення не знайдений, створюється об'єкт HttpError з кодом помилки 404 і повідомленням про помилку
   }
-  
-  res.json(result);
+
+  res.json(result); // Відправка відповіді з результатом оновлення контакту
 };
 
-module.exports = updateById;
+module.exports = updateById; 
