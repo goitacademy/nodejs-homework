@@ -7,20 +7,20 @@
 - Zainicjalizuj npm w projekcie.
 - W root projektu utwórz plik `index.js`.
 - Ustaw pakiet [nodemon](https://www.npmjs.com/package/nodemon) jako zależność opracowywania (devDependencies).
-- Do pliku `package.json` dodaj "skrytpy" dla włączenia `index.js`.
+- Do pliku `package.json` dodaj "skrypty" dla włączenia `index.js`.
 - Skrypt `start`, który uruchamia `index.js` przy pomocy `node`.
 - Skrypt `start:dev`, który uruchamia `index.js` przy pomocy `nodemon`.
 
 ## Krok 2
 
-W root projektu utwórz plik `db`. Dla zapisywania kontaktów ściągnij i wykorzystaj plik [contacts.json](./contacts.json), umieszczając go w folderze `db`.
+W root projektu utwórz plik `db`. Do zapisywania kontaktów ściągnij i wykorzystaj plik [contacts.json](./contacts.json), umieszczając go w folderze `db`.
 
 W root projektu utwórz plik `contacts.js`.
 
 - Zaimportuj moduły `fs` i `path` do pracy z systemem plików.
 - Utwórz zmienną `contactsPath` i zapisz w niej ścieżkę do pliku `contacts.json`. Do utworzenia ścieżki wykorzystaj metody modułu `path`.
 - Dodaj funkcję do pracy ze zbiorem kontaktów. W funcjach wykorzystaj moduł `fs` oraz jego metody `readFile()` i `writeFile()`.
-- Zrób eksport utworzonych funkcji przez `module.exports`.
+- Wyeksportuj utworzonych funkcji przez `module.exports`.
 
 ```js
 // contacts.js
@@ -50,7 +50,7 @@ function addContact(name, email, phone) {
 
 ## Krok 3
 
-Utwórz import modułu `contacts.js` w pliku `index.js` i sprawdź wydajność funkcji dla pracy z kontaktami.
+Zaimportuj modułu `contacts.js` w pliku `index.js` i sprawdź wydajność funkcji dla pracy z kontaktami.
 
 ## Krok 4
 
@@ -152,7 +152,7 @@ node index.js --action remove --id qdggE76Jtbfd9eWJHrssH
 
 Screenshoty wykonania poleceń można wysłać na dowolną, bezpłatną chmurę zapisywania obrazów (Przykład: [monosnap](https://monosnap.com/), [imgbb.com](https://imgbb.com/)) i odpowiednie odnośniki należy dodać do pliku README.md. Utwórz ten plik w root projektu. Następnie dodaj odnośnik do repozytorium z pracą domową do [schoology](https://app.schoology.com/login) dla sprawdzenia przez mentora.
 
-## Kryteria zaliczenia
+## Kryteria akceptacji
 
 - Utworzone repozytorium z pracą domową &mdash; CLI aplikacja.
 - Zadanie wysłane do mentora na [schoology](https://app.schoology.com/login) w celu sprawdzenia (odnośnik do repozytorium).
